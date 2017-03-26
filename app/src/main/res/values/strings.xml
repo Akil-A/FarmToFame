@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Farm to Fame</string>
+	<string name="moneyz">Moneyz</string>
+	<string name="farmer">Farmer</string>
+	<string name="dollars">$$$</string>
+	<string name="buy_farmer">Buy Farmer</string>
+	<string name="factories">Factories</string>
+	<string name="x">X</string>
+	<string name="buy_factory">Buy Factory</string>
+	<string name="land">Land</string>
+	<string name="kvm">kvm</string>
+	<string name="buy_land">Buy Land</string>
+	<string name="chicken">Chicken</string>
+	<string name="buy_chicken">Buy Chicken</string>
+	<string name="pig">Pig</string>
+	<string name="buy_pig">Buy Pig</string>
+	<string name="sheep">Sheep</string>
+	<string name="buy_sheep">Buy Sheep</string>
+	<string name="cow">Cow</string>
+	<string name="buy_cow">Buy Cow</string>
+	<string name="bull">Bull</string>
+	<string name="buy_bull">Buy Bull</string>
+</resources>

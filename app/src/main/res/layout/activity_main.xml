@@ -1,0 +1,293 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#0099cc"
+	android:orientation="vertical"
+	android:gravity="center"
+	tools:context="no.pxpdev.farmtofame.MainActivity"
+	>
+
+	<TextView
+		android:id="@+id/total_money"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:text="@string/moneyz"
+		android:textSize="15pt"
+		android:layout_marginBottom="12dp"
+		/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_horizontal"
+		android:weightSum="12"
+		>
+
+		<Button
+			android:id="@+id/farmer_button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/farmer"
+			/>
+
+		<TextView
+			android:id="@+id/farmer_money"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="2"
+			android:gravity="center_horizontal"
+			android:text="@string/dollars"
+			/>
+
+		<Button
+			android:id="@+id/buy_farmer"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/buy_farmer"
+			/>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_horizontal"
+		android:weightSum="12"
+		>
+
+		<Button
+			android:id="@+id/factory_button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/factories"
+			/>
+
+		<TextView
+			android:id="@+id/factory_money"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="2"
+			android:gravity="center_horizontal"
+			android:text="@string/x"
+			/>
+
+		<Button
+			android:id="@+id/buy_factory"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/buy_factory"
+			/>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_horizontal"
+		android:weightSum="12"
+		>
+
+		<Button
+			android:id="@+id/land_button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/land"
+			/>
+
+		<TextView
+			android:id="@+id/land_size"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="2"
+			android:gravity="center_horizontal"
+			android:text="@string/kvm"
+			/>
+
+		<Button
+			android:id="@+id/buy_land"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/buy_land"
+			/>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_horizontal"
+		android:weightSum="12"
+		>
+
+		<Button
+			android:id="@+id/chicken_button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/chicken"
+			/>
+
+		<TextView
+			android:id="@+id/chicken_money"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="2"
+			android:gravity="center_horizontal"
+			android:text="@string/dollars"
+			/>
+
+		<Button
+			android:id="@+id/buy_chicken"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/buy_chicken"
+			/>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_horizontal"
+		android:weightSum="12"
+		>
+
+		<Button
+			android:id="@+id/pig_button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/pig"
+			/>
+
+		<TextView
+			android:id="@+id/pig_money"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="2"
+			android:gravity="center_horizontal"
+			android:text="@string/dollars"
+			/>
+
+		<Button
+			android:id="@+id/buy_pig"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/buy_pig"
+			/>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_horizontal"
+		android:weightSum="12"
+		>
+
+		<Button
+			android:id="@+id/sheep_button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/sheep"
+			/>
+
+		<TextView
+			android:id="@+id/sheep_money"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="2"
+			android:gravity="center_horizontal"
+			android:text="@string/dollars"
+			/>
+
+		<Button
+			android:id="@+id/buy_sheep"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/buy_sheep"
+			/>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_horizontal"
+		android:weightSum="12"
+		>
+
+		<Button
+			android:id="@+id/cow_button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/cow"
+			/>
+
+		<TextView
+			android:id="@+id/cow_money"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="2"
+			android:gravity="center_horizontal"
+			android:text="@string/dollars"
+			/>
+
+		<Button
+			android:id="@+id/buy_cow"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/buy_cow"
+			/>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_horizontal"
+		android:weightSum="12"
+		>
+
+		<Button
+			android:id="@+id/bull_button"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/bull"
+			/>
+
+		<TextView
+			android:id="@+id/bull_money"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="2"
+			android:gravity="center_horizontal"
+			android:text="@string/dollars"
+			/>
+
+		<Button
+			android:id="@+id/buy_bull"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="4"
+			android:text="@string/buy_bull"
+			/>
+	</LinearLayout>
+
+</LinearLayout>
