@@ -7,7 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,26 +26,47 @@ public class MainActivity extends AppCompatActivity {
     private static final String FILE_TIMERS_SERIALIZED = "timers.ser";
 
     private static final String ID_FARMERS = "farmers";
-    private static final String ID_CHICKENS = "chickens";
+    private static final String ID_FACTORIES = "factories";
     private static final String ID_LANDS = "lands";
+    private static final String ID_CHICKENS = "chickens";
+    private static final String ID_PIGS = "pigs";
+    private static final String ID_SHEEPS = "sheeps";
+    private static final String ID_COWS = "cows";
+    private static final String ID_BULLS = "bulls";
 
     private HashMap<String, UiTimedEvent> mTimedEvents = new HashMap<>();
 
     private TextView mFarmerTextView;
-    private TextView mChickenTextView;
+    private TextView mFactoryTextView;
     private TextView mLandTextView;
+    private TextView mChickenTextView;
+    private TextView mPigTextView;
+    private TextView mSheepTextView;
+    private TextView mCowTextView;
+    private TextView mBullTextView;
     private TextView mTotalMoney;
 
-    private Button buyFarmer;
-    private Button buyChicken;
-    private Button buyLand;
+    private Button mBuyFarmer;
+    private Button mBuyFactory;
+    private Button mBuyLand;
+    private Button mBuyChicken;
+    private Button mBuyPig;
+    private Button mBuySheep;
+    private Button mBuyCow;
+    private Button mBuyBull;
 
     private int mChickens;
     private int mSum = 10;
 
-    Categories mChicken;
     Categories mFarmer;
+    Categories mFactories;
     Categories mLand;
+    Categories mChicken;
+    Categories mPig;
+    Categories mSheep;
+    Categories mCow;
+    Categories mBull;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +76,15 @@ public class MainActivity extends AppCompatActivity {
 
         //Set up statistic Views
         mFarmerTextView = (TextView)findViewById(R.id.farmer_money);
-        mChickenTextView = (TextView)findViewById(R.id.chicken_money);
+        mFactoryTextView = (TextView)findViewById(R.id.factory_money);
         mLandTextView = (TextView)findViewById(R.id.land_size);
+        mChickenTextView = (TextView)findViewById(R.id.chicken_money);
+        mPigTextView = (TextView)findViewById(R.id.pig_money);
+        mSheepTextView = (TextView)findViewById(R.id.sheep_money);
+        mCowTextView = (TextView)findViewById(R.id.cow_money);
+        mBullTextView = (TextView)findViewById(R.id.bull_money);
+
+
         mTotalMoney = (TextView)findViewById(R.id.total_money);
 
         mFarmerTextView.setText("1");
@@ -64,21 +93,47 @@ public class MainActivity extends AppCompatActivity {
         mTotalMoney.setText("10");
 
         //Set up Button listeners
-        buyFarmer = (Button)findViewById(R.id.buy_farmer);
-        buyFarmer.setTag(ID_FARMERS);
-        buyFarmer.setOnClickListener(mBuyListener);
+        mBuyFarmer = (Button)findViewById(R.id.buy_farmer);
+        mBuyFarmer.setTag(ID_FARMERS);
+        mBuyFarmer.setOnClickListener(mBuyListener);
 
-        buyChicken = (Button)findViewById(R.id.buy_chicken);
-        buyChicken.setTag(ID_CHICKENS);
-        buyChicken.setOnClickListener(mBuyListener);
+        mBuyFactory = (Button)findViewById(R.id.buy_factory);
+        mBuyFarmer.setTag(ID_FACTORIES);
+        mBuyFarmer.setOnClickListener(mBuyListener);
 
-        buyLand = (Button)findViewById(R.id.buy_land);
-        buyLand.setTag(ID_LANDS);
-        buyLand.setOnClickListener(mBuyListener);
+        mBuyLand = (Button)findViewById(R.id.buy_land);
+        mBuyLand.setTag(ID_LANDS);
+        mBuyLand.setOnClickListener(mBuyListener);
 
-        mChicken = new Categories(10, 1, 1000, 1);
+        mBuyChicken = (Button)findViewById(R.id.buy_chicken);
+        mBuyChicken.setTag(ID_CHICKENS);
+        mBuyChicken.setOnClickListener(mBuyListener);
+
+        mBuyPig = (Button)findViewById(R.id.buy_pig);
+        mBuyPig.setTag(ID_PIGS);
+        mBuyPig.setOnClickListener(mBuyListener);
+
+        mBuySheep = (Button)findViewById(R.id.buy_sheep);
+        mBuySheep.setTag(ID_SHEEPS);
+        mBuySheep.setOnClickListener(mBuyListener);
+
+        mBuyCow = (Button)findViewById(R.id.buy_cow);
+        mBuyCow.setTag(ID_COWS);
+        mBuyCow.setOnClickListener(mBuyListener);
+
+        mBuyBull = (Button)findViewById(R.id.buy_bull);
+        mBuyBull.setTag(ID_BULLS);
+        mBuyBull.setOnClickListener(mBuyListener);
+
+        //Declare Category models
         mFarmer = new Categories(20, 1, 3000, 3);
+        mFactories = new Categories(200, 0, 2000, 50);
         mLand = new Categories(100, 1, 5000, 2);
+        mChicken = new Categories(10, 1, 1000, 1);
+        mPig = new Categories(40, 0, 3000, 60);
+        mSheep = new Categories(35, 0, 2000, 50);
+        mCow = new Categories(80, 0, 5000, 70);
+        mBull = new Categories(200, 0, 6000, 200);
 
         restoreTimers();
     }
@@ -125,6 +180,50 @@ public class MainActivity extends AppCompatActivity {
                 mFarmer.setPrice(categoryPrice);
                 break;
 
+            case ID_FACTORIES:
+                categoryTimeout = mFactories.getTimeout();
+                categoryCounter = mFactories.getCounter();
+                categoryBonus = mFactories.getCategoryBonus();
+                categoryPrice = mFactories.getPrice();
+
+                if(mSum >= categoryPrice) {
+                    mSum -= categoryPrice;
+                    categoryPrice += ++categoryCounter*2;
+                }
+                else
+                    return false;
+
+                mFactoryTextView.setText(String.valueOf(categoryPrice));
+                callback = (counter) -> {
+                    mSum += categoryBonus;
+                    mTotalMoney.setText(String.valueOf(mSum));
+                };
+                mFactories.setCounter(++categoryCounter);
+                mFactories.setPrice(categoryPrice);
+                break;
+
+            case ID_LANDS:
+                categoryTimeout = mLand.getTimeout();
+                categoryCounter = mLand.getCounter();
+                categoryBonus = mLand.getCategoryBonus();
+                categoryPrice = mLand.getPrice();
+
+                if(mSum >= categoryPrice) {
+                    mSum -= categoryPrice;
+                    categoryPrice += categoryCounter*2;
+                }
+                else
+                    return false;
+
+                mLandTextView.setText(String.valueOf(categoryPrice));
+                callback = (counter) -> {
+                    mSum += categoryBonus;
+                    mTotalMoney.setText(String.valueOf(mSum));
+                };
+                mLand.setCounter(++categoryCounter);
+                mLand.setPrice(categoryPrice);
+                break;
+
             case ID_CHICKENS:
                 categoryTimeout = mChicken.getTimeout();
                 categoryCounter = mChicken.getCounter();
@@ -149,11 +248,11 @@ public class MainActivity extends AppCompatActivity {
                 mChicken.setPrice(categoryPrice);
                 break;
 
-            case ID_LANDS:
-                categoryTimeout = mLand.getTimeout();
-                categoryCounter = mLand.getCounter();
-                categoryBonus = mLand.getCategoryBonus();
-                categoryPrice = mLand.getPrice();
+            case ID_PIGS:
+                categoryTimeout = mPig.getTimeout();
+                categoryCounter = mPig.getCounter();
+                categoryBonus = mPig.getCategoryBonus();
+                categoryPrice = mPig.getPrice();
 
                 if(mSum >= categoryPrice) {
                     mSum -= categoryPrice;
@@ -162,14 +261,81 @@ public class MainActivity extends AppCompatActivity {
                 else
                     return false;
 
-                mLandTextView.setText(String.valueOf(categoryPrice));
+                mPigTextView.setText(String.valueOf(categoryPrice));
                 callback = (counter) -> {
                     mSum += categoryBonus;
                     mTotalMoney.setText(String.valueOf(mSum));
                 };
-                mLand.setCounter(++categoryCounter);
-                mLand.setPrice(categoryPrice);
+                mPig.setCounter(++categoryCounter);
+                mPig.setPrice(categoryPrice);
                 break;
+
+            case ID_SHEEPS:
+                categoryTimeout = mSheep.getTimeout();
+                categoryCounter = mSheep.getCounter();
+                categoryBonus = mSheep.getCategoryBonus();
+                categoryPrice = mSheep.getPrice();
+
+                if(mSum >= categoryPrice) {
+                    mSum -= categoryPrice;
+                    categoryPrice += categoryCounter*2;
+                }
+                else
+                    return false;
+
+                mSheepTextView.setText(String.valueOf(categoryPrice));
+                callback = (counter) -> {
+                    mSum += categoryBonus;
+                    mTotalMoney.setText(String.valueOf(mSum));
+                };
+                mSheep.setCounter(++categoryCounter);
+                mSheep.setPrice(categoryPrice);
+                break;
+
+            case ID_COWS:
+                categoryTimeout = mCow.getTimeout();
+                categoryCounter = mCow.getCounter();
+                categoryBonus = mCow.getCategoryBonus();
+                categoryPrice = mCow.getPrice();
+
+                if(mSum >= categoryPrice) {
+                    mSum -= categoryPrice;
+                    categoryPrice += categoryCounter*2;
+                }
+                else
+                    return false;
+
+                mCowTextView.setText(String.valueOf(categoryPrice));
+                callback = (counter) -> {
+                    mSum += categoryBonus;
+                    mTotalMoney.setText(String.valueOf(mSum));
+                };
+                mCow.setCounter(++categoryCounter);
+                mCow.setPrice(categoryPrice);
+                break;
+
+            case ID_BULLS:
+                categoryTimeout = mBull.getTimeout();
+                categoryCounter = mBull.getCounter();
+                categoryBonus = mBull.getCategoryBonus();
+                categoryPrice = mBull.getPrice();
+
+                if(mSum >= categoryPrice) {
+                    mSum -= categoryPrice;
+                    categoryPrice += categoryCounter*2;
+                }
+                else
+                    return false;
+
+                mBullTextView.setText(String.valueOf(categoryPrice));
+                callback = (counter) -> {
+                    mSum += categoryBonus;
+                    mTotalMoney.setText(String.valueOf(mSum));
+                };
+                mBull.setCounter(++categoryCounter);
+                mBull.setPrice(categoryPrice);
+                break;
+
 
             default:
                 Log.w(TAG, "startTimer: invalid id: " + id);
