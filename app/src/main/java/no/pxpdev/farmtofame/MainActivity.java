@@ -2,13 +2,13 @@ package no.pxpdev.farmtofame;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView mCowTextView;
     private TextView mBullTextView;
     private TextView mTotalMoney;
+    private TextView mAnimalsTextView;
+    private TextView mLandsTextView;
 
     private Button mBuyFarmer;
     private Button mBuyFactory;
@@ -57,9 +59,14 @@ public class MainActivity extends AppCompatActivity {
 
     private int mChickens;
     private int mSum = 10;
+    private int mAnimals = 0;
+    private int mFarmers = 1;
+    private int mLands = 1;
+    private int mFactories = 1;
+    private View mView;
 
     Categories mFarmer;
-    Categories mFactories;
+    Categories mFactory;
     Categories mLand;
     Categories mChicken;
     Categories mPig;
@@ -74,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        mView = findViewById(R.id.activity_main_layout);
+
         //Set up statistic Views
         mFarmerTextView = (TextView)findViewById(R.id.farmer_money);
         mFactoryTextView = (TextView)findViewById(R.id.factory_money);
@@ -83,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         mSheepTextView = (TextView)findViewById(R.id.sheep_money);
         mCowTextView = (TextView)findViewById(R.id.cow_money);
         mBullTextView = (TextView)findViewById(R.id.bull_money);
+        mAnimalsTextView = (TextView)findViewById(R.id.animals_counter_text_view);
+        mLandsTextView = (TextView)findViewById(R.id.lands_counter_text_view);
 
 
         mTotalMoney = (TextView)findViewById(R.id.total_money);
@@ -98,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
         mBuyFarmer.setOnClickListener(mBuyListener);
 
         mBuyFactory = (Button)findViewById(R.id.buy_factory);
-        mBuyFarmer.setTag(ID_FACTORIES);
-        mBuyFarmer.setOnClickListener(mBuyListener);
+        mBuyFactory.setTag(ID_FACTORIES);
+        mBuyFactory.setOnClickListener(mBuyListener);
 
         mBuyLand = (Button)findViewById(R.id.buy_land);
         mBuyLand.setTag(ID_LANDS);
@@ -127,9 +138,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Declare Category models
         mFarmer = new Categories(20, 1, 3000, 3);
-        mFactories = new Categories(200, 0, 2000, 50);
-        mLand = new Categories(100, 1, 5000, 2);
-        mChicken = new Categories(10, 1, 1000, 1);
+        mFactory = new Categories(2, 0, 2000, 50);
+        mLand = new Categories(1, 1, 5000, 2);
+        mChicken = new Categories(1, 1, 1000, 1);
         mPig = new Categories(40, 0, 3000, 60);
         mSheep = new Categories(35, 0, 2000, 50);
         mCow = new Categories(80, 0, 5000, 70);
@@ -157,16 +168,24 @@ public class MainActivity extends AppCompatActivity {
         int categoryCounter;
         int categoryPrice;
         int categoryBonus;
-        switch(id){
+        boolean buyFarmer = (mAnimals / mFarmers) > 24;
+        boolean buyLand = (mAnimals / mLands) > 99;
+        boolean canBuyFactory = (mLands / mFactories) > 9;
+
+        switch(id)  {
             case ID_FARMERS:
                 categoryTimeout = mFarmer.getTimeout();
                 categoryCounter = mFarmer.getCounter();
                 categoryBonus = mFarmer.getCategoryBonus();
                 categoryPrice = mFarmer.getPrice();
 
+
                 if(mSum >= categoryPrice) {
                     mSum -= categoryPrice;
                     categoryPrice += ++categoryCounter*2;
+                    mFarmers++;
+                   /* if(buyFarmer)
+                        mAnimals = 0;*/
                 }
                 else
                     return false;
@@ -181,25 +200,31 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case ID_FACTORIES:
-                categoryTimeout = mFactories.getTimeout();
-                categoryCounter = mFactories.getCounter();
-                categoryBonus = mFactories.getCategoryBonus();
-                categoryPrice = mFactories.getPrice();
+                categoryTimeout = mFactory.getTimeout();
+                categoryCounter = mFactory.getCounter();
+                categoryBonus = mFactory.getCategoryBonus();
+                categoryPrice = mFactory.getPrice();
 
-                if(mSum >= categoryPrice) {
+                if(mSum >= categoryPrice && canBuyFactory) {
                     mSum -= categoryPrice;
-                    categoryPrice += ++categoryCounter*2;
+                    //categoryPrice += ++categoryCounter*2;
+                    mFactories++;
                 }
-                else
+                else {
+                    if(!canBuyFactory)
+                        showSnackBar("Need to buy more land first");
+
                     return false;
+
+                }
 
                 mFactoryTextView.setText(String.valueOf(categoryPrice));
                 callback = (counter) -> {
                     mSum += categoryBonus;
                     mTotalMoney.setText(String.valueOf(mSum));
                 };
-                mFactories.setCounter(++categoryCounter);
-                mFactories.setPrice(categoryPrice);
+                mFactory.setCounter(++categoryCounter);
+                mFactory.setPrice(categoryPrice);
                 break;
 
             case ID_LANDS:
@@ -210,7 +235,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if(mSum >= categoryPrice) {
                     mSum -= categoryPrice;
-                    categoryPrice += categoryCounter*2;
+                    //categoryPrice += categoryCounter*2;
+                    mLands++;
                 }
                 else
                     return false;
@@ -230,12 +256,19 @@ public class MainActivity extends AppCompatActivity {
                 categoryBonus = mChicken.getCategoryBonus();
                 categoryPrice = mChicken.getPrice();
 
-                if( mSum >= categoryPrice) {
+                if(mSum >= categoryPrice && !buyFarmer && !buyLand) {
                     mSum -= categoryPrice;
                     categoryPrice += categoryCounter*2;
+                    mAnimals++;
                 }
-                else
+                else{
+                    if(buyFarmer)
+                        showSnackBar("Need to buy farmer");
+                    else if(buyLand)
+                        showSnackBar("Need to buy land");
+
                     return false;
+                }
 
                 mChickenTextView.setText(String.valueOf(categoryPrice));
                 mChickens = initial;
@@ -254,12 +287,19 @@ public class MainActivity extends AppCompatActivity {
                 categoryBonus = mPig.getCategoryBonus();
                 categoryPrice = mPig.getPrice();
 
-                if(mSum >= categoryPrice) {
+                if(mSum >= categoryPrice && !buyFarmer && !buyLand) {
                     mSum -= categoryPrice;
                     categoryPrice += categoryCounter*2;
+                    mAnimals++;
                 }
-                else
+                else{
+                    if(buyFarmer)
+                        showSnackBar("Need to buy farmer");
+                    else if(buyLand)
+                        showSnackBar("Need to buy land");
+
                     return false;
+                }
 
                 mPigTextView.setText(String.valueOf(categoryPrice));
                 callback = (counter) -> {
@@ -276,12 +316,19 @@ public class MainActivity extends AppCompatActivity {
                 categoryBonus = mSheep.getCategoryBonus();
                 categoryPrice = mSheep.getPrice();
 
-                if(mSum >= categoryPrice) {
+                if(mSum >= categoryPrice && !buyFarmer && !buyLand) {
                     mSum -= categoryPrice;
                     categoryPrice += categoryCounter*2;
+                    mAnimals++;
                 }
-                else
+                else {
+                    if(buyFarmer)
+                        showSnackBar("Need to buy farmer");
+                    else if(buyLand)
+                        showSnackBar("Need to buy land");
+
                     return false;
+                }
 
                 mSheepTextView.setText(String.valueOf(categoryPrice));
                 callback = (counter) -> {
@@ -298,12 +345,19 @@ public class MainActivity extends AppCompatActivity {
                 categoryBonus = mCow.getCategoryBonus();
                 categoryPrice = mCow.getPrice();
 
-                if(mSum >= categoryPrice) {
+                if(mSum >= categoryPrice && !buyFarmer && !buyLand) {
                     mSum -= categoryPrice;
                     categoryPrice += categoryCounter*2;
+                    mAnimals++;
                 }
-                else
+                else{
+                    if(buyFarmer)
+                        showSnackBar("Need to buy farmer");
+                    else if(buyLand)
+                        showSnackBar("Need to buy land");
+
                     return false;
+                }
 
                 mCowTextView.setText(String.valueOf(categoryPrice));
                 callback = (counter) -> {
@@ -320,12 +374,19 @@ public class MainActivity extends AppCompatActivity {
                 categoryBonus = mBull.getCategoryBonus();
                 categoryPrice = mBull.getPrice();
 
-                if(mSum >= categoryPrice) {
+                if(mSum >= categoryPrice && !buyFarmer && !buyLand) {
                     mSum -= categoryPrice;
                     categoryPrice += categoryCounter*2;
+                    mAnimals++;
                 }
-                else
+                else{
+                    if(buyFarmer)
+                        showSnackBar("Need to buy farmer");
+                    else if(buyLand)
+                        showSnackBar("Need to buy land");
+
                     return false;
+                }
 
                 mBullTextView.setText(String.valueOf(categoryPrice));
                 callback = (counter) -> {
@@ -342,6 +403,9 @@ public class MainActivity extends AppCompatActivity {
                 return false;
         }
 
+        mAnimalsTextView.setText(String.valueOf(mAnimals));
+        mLandsTextView.setText(String.valueOf(mLands));
+
         if(mTimedEvents.containsKey(id)){
             return false;
         } else {
@@ -350,8 +414,12 @@ public class MainActivity extends AppCompatActivity {
             event.start();
             return true;
         }
-
     }
+
+    private void showSnackBar(String message){
+        Snackbar.make(mView, message, Snackbar.LENGTH_LONG).show();
+    }
+
 
     private boolean stopTimer(String id)
     {

@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
+	          android:id="@+id/activity_main_layout"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="#0099cc"
@@ -289,5 +290,40 @@
 			android:text="@string/buy_bull"
 			/>
 	</LinearLayout>
+	<TextView
+		android:id="@+id/animals_text"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:textSize="21sp"
+		android:text="Animals "
+		/>
+
+	<TextView
+		android:id="@+id/animals_counter_text_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:textSize="21sp"
+		android:text="x"
+		/>
+
+	<TextView
+		android:id="@+id/lands_text"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:textSize="21sp"
+		android:text="Lands "
+		/>
+
+	<TextView
+		android:id="@+id/lands_counter_text_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:textSize="21sp"
+		android:text="x"
+		/>
 
 </LinearLayout>
