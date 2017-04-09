@@ -290,40 +290,177 @@
 			android:text="@string/buy_bull"
 			/>
 	</LinearLayout>
-	<TextView
-		android:id="@+id/animals_text"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center_horizontal"
-		android:textSize="21sp"
-		android:text="Animals "
-		/>
 
-	<TextView
-		android:id="@+id/animals_counter_text_view"
+	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center_horizontal"
-		android:textSize="21sp"
-		android:text="x"
-		/>
+		android:layout_height="match_parent"
+		>
 
-	<TextView
-		android:id="@+id/lands_text"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center_horizontal"
-		android:textSize="21sp"
-		android:text="Lands "
-		/>
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			android:layout_gravity="start"
+			>
+			<TextView
+				android:id="@+id/animals_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="start"
+				android:textSize="21sp"
+				android:text="Animals "
+				/>
 
-	<TextView
-		android:id="@+id/lands_counter_text_view"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center_horizontal"
-		android:textSize="21sp"
-		android:text="x"
-		/>
+			<TextView
+				android:id="@+id/animals_counter_text_view"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="start"
+				android:textSize="21sp"
+				android:text="       x"
+				/>
+
+			<TextView
+				android:id="@+id/lands_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="start"
+				android:textSize="21sp"
+				android:text="Lands "
+				/>
+
+			<TextView
+				android:id="@+id/lands_counter_text_view"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="start"
+				android:textSize="21sp"
+				android:text="     x"
+				/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginLeft="30dp">
+			<TextView
+				android:id="@+id/eggs_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top|center_horizontal"
+				android:textSize="21sp"
+				android:text="Eggs "
+				/>
+
+			<TextView
+				android:id="@+id/egg_counter_text_view"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textSize="21sp"
+				android:text="    x"
+				/>
+
+			<TextView
+				android:id="@+id/meat_text"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textSize="21sp"
+				android:text="Meats "
+				/>
+
+			<TextView
+				android:id="@+id/meat_counter_text_view"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textSize="21sp"
+				android:text="    x"
+				/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginLeft="30dp">
+			<TextView
+				android:id="@+id/wool_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top|center_horizontal"
+				android:textSize="21sp"
+				android:text="Wool "
+				/>
+
+			<TextView
+				android:id="@+id/wool_counter_text_view"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textSize="21sp"
+				android:text="    x"
+				/>
+
+			<TextView
+				android:id="@+id/milk_text"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textSize="21sp"
+				android:text="Milk "
+				/>
+
+			<TextView
+				android:id="@+id/milk_counter_text_view"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textSize="21sp"
+				android:text="    x"
+				/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginLeft="30dp">
+			<TextView
+				android:id="@+id/beef_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top|center_horizontal"
+				android:textSize="21sp"
+				android:text="Beef "
+				/>
+
+			<TextView
+				android:id="@+id/beef_counter_text_view"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textSize="21sp"
+				android:text="        x"
+				/>
+
+			<TextView
+				android:id="@+id/factory_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top|center_horizontal"
+				android:textSize="21sp"
+				android:text="Factories "
+				/>
+
+			<TextView
+				android:id="@+id/factory_counter_text_view"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textSize="21sp"
+				android:text="        x"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
 
 </LinearLayout>

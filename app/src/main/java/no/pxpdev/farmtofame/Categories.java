@@ -10,6 +10,8 @@ public class Categories {
     int mCounter;
     int mTimeout;
     int mCategoryBonus;
+    int mMaterials;
+    int mMaterialCounter = 1;
 
     public Categories(int price, int counter, int time, int categoryBonus) {
         mPrice = price;
@@ -50,5 +52,19 @@ public class Categories {
         mCategoryBonus = categoryBonus;
     }
 
+    public int getMaterials() {
+        return mMaterials;
+    }
 
+    public void setMaterials(int materials) {
+        mMaterials = materials;
+    }
+
+    public int getMaterialCounter() {
+        return mMaterialCounter;
+    }
+
+    public void setMaterialCounter(int materialCounter) {
+        mMaterialCounter = materialCounter;
+    }
 }
