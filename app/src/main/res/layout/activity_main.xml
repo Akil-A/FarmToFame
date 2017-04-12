@@ -292,13 +292,13 @@
 	</LinearLayout>
 
 	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 		>
 
 		<LinearLayout
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:orientation="vertical"
 			android:layout_gravity="start"
 			>
@@ -307,7 +307,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="start"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="Animals "
 				/>
 
@@ -316,7 +316,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="start"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="       x"
 				/>
 
@@ -325,7 +325,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="start"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="Lands "
 				/>
 
@@ -334,14 +334,14 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="start"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="     x"
 				/>
 		</LinearLayout>
 
 		<LinearLayout
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:orientation="vertical"
 			android:layout_gravity="center_horizontal"
 			android:layout_marginLeft="30dp">
@@ -350,38 +350,38 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="top|center_horizontal"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="Eggs "
 				/>
 
 			<TextView
 				android:id="@+id/egg_counter_text_view"
-				android:layout_width="match_parent"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="    x"
 				/>
 
 			<TextView
 				android:id="@+id/meat_text"
-				android:layout_width="match_parent"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="Meats "
 				/>
 
 			<TextView
 				android:id="@+id/meat_counter_text_view"
-				android:layout_width="match_parent"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="    x"
 				/>
 		</LinearLayout>
 
 		<LinearLayout
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:orientation="vertical"
 			android:layout_gravity="center_horizontal"
 			android:layout_marginLeft="30dp">
@@ -390,38 +390,38 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="top|center_horizontal"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="Wool "
 				/>
 
 			<TextView
 				android:id="@+id/wool_counter_text_view"
-				android:layout_width="match_parent"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="    x"
 				/>
 
 			<TextView
 				android:id="@+id/milk_text"
-				android:layout_width="match_parent"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="Milk "
 				/>
 
 			<TextView
 				android:id="@+id/milk_counter_text_view"
-				android:layout_width="match_parent"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="    x"
 				/>
 		</LinearLayout>
 
 		<LinearLayout
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:orientation="vertical"
 			android:layout_gravity="center_horizontal"
 			android:layout_marginLeft="30dp">
@@ -430,15 +430,15 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="top|center_horizontal"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="Beef "
 				/>
 
 			<TextView
 				android:id="@+id/beef_counter_text_view"
-				android:layout_width="match_parent"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="        x"
 				/>
 
@@ -447,20 +447,72 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="top|center_horizontal"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="Factories "
 				/>
 
 			<TextView
 				android:id="@+id/factory_counter_text_view"
-				android:layout_width="match_parent"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textSize="21sp"
+				android:textSize="12sp"
 				android:text="        x"/>
 
 		</LinearLayout>
 
+
 	</LinearLayout>
 
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+	android:orientation="vertical">
 
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			>
+
+			<Button
+				android:id="@+id/sell_eggs_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Sell Eggs"
+				/>
+
+			<Button
+				android:id="@+id/sell_meat_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Sell Meat"
+				/>
+
+		<Button
+			android:id="@+id/sell_wool_button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Sell Wool"
+			/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+
+			<Button
+				android:id="@+id/sell_milk_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Sell Milk"
+				/>
+
+			<Button
+				android:id="@+id/sell_beef_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Sell Beef"
+				/>
+		</LinearLayout>
+
+	</LinearLayout>
 </LinearLayout>
