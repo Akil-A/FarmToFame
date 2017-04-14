@@ -9,11 +9,11 @@ public class Categories {
     int mPrice;
     int mCounter;
     int mTimeout;
-    int mCategoryBonus;
+    double mCategoryBonus;
     int mMaterials;
     int mMaterialCounter = 1;
 
-    public Categories(int price, int counter, int time, int categoryBonus) {
+    public Categories(int price, int counter, int time, double categoryBonus) {
         mPrice = price;
         mCounter = counter;
         mTimeout = time;
@@ -44,11 +44,11 @@ public class Categories {
         mPrice = price;
     }
 
-    public int getCategoryBonus() {
+    public double getCategoryBonus() {
         return mCategoryBonus;
     }
 
-    public void setCategoryBonus(int categoryBonus) {
+    public void setCategoryBonus(double categoryBonus) {
         mCategoryBonus = categoryBonus;
     }
 

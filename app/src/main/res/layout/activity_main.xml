@@ -512,6 +512,13 @@
 				android:layout_height="wrap_content"
 				android:text="Sell Beef"
 				/>
+
+			<Button
+				android:id="@+id/reset_game"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Reset Game"
+				/>
 		</LinearLayout>
 
 	</LinearLayout>

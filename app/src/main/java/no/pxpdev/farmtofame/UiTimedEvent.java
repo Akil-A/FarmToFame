@@ -3,9 +3,6 @@ package no.pxpdev.farmtofame;
 import android.os.Handler;
 import android.os.Looper;
 
-/**
- * Created by akil_91 on 25.03.2017.
- */
 class UiTimedEvent implements Runnable {
 
     private final Handler mUiHandler;

@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String ID_WOOL = "sellWool";
     private static final String ID_MILK = "sellMilk";
     private static final String ID_BEEF = "sellBeef";
+    private static final String RESET_GAME = "resetGame";
 
 
     private HashMap<String, UiTimedEvent> mTimedEvents = new HashMap<>();
@@ -74,13 +75,16 @@ public class MainActivity extends AppCompatActivity {
     private Button mSellWool;
     private Button mSellMilk;
     private Button mSellBeef;
+    private Button mResetGame;
 
     private int mChickens;
-    private int mSum = 10;
+    private double mSum = 10;
     private int mAnimals = 1;
     private int mFarmers = 1;
     private int mLands = 1;
     private int mFactories = 1;
+
+    private double mResetBonus = 1;
 
     private boolean mPigFactory;
     private boolean mSheepFactory;
@@ -185,6 +189,10 @@ public class MainActivity extends AppCompatActivity {
         mSellBeef.setTag(ID_BEEF);
         mSellBeef.setOnClickListener(mSellListener);
 
+        mResetGame = (Button) findViewById(R.id.reset_game);
+        mResetGame.setTag(RESET_GAME);
+        mResetGame.setOnClickListener(mSellListener);
+
         //Declare Category models
         mFarmer = new Categories(20, 1, 3000, 3);
         mFactory = new Categories(2, 1, 10000, 50);
@@ -219,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
     public void sellMaterials(String id) {
         //TODO Multiplying decimals with int bad idea?
 
-        int materials;
+        double materials;
 
         switch (id) {
 
@@ -228,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
                 mChicken.setMaterialCounter(0);
                 mEggsTextView.setText(String.valueOf(0));
                 materials *= 1.5;
-                mSum += materials;
+                mSum += materials*mResetBonus;
                 mTotalMoney.setText(String.valueOf(mSum));
                 break;
 
@@ -237,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
                 mPig.setMaterialCounter(0);
                 mMeatTextView.setText(String.valueOf(0));
                 materials *= 2.1;
-                mSum += materials;
+                mSum += materials*mResetBonus;
                 mTotalMoney.setText(String.valueOf(mSum));
                 break;
 
@@ -246,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                 mSheep.setMaterialCounter(0);
                 mWoolTextView.setText(String.valueOf(0));
                 materials *= 2.5;
-                mSum += materials;
+                mSum += materials*mResetBonus;
                 mTotalMoney.setText(String.valueOf(mSum));
                 break;
 
@@ -255,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
                 mCow.setMaterialCounter(0);
                 mMilkTextView.setText(String.valueOf(0));
                 materials *= 2.9;
-                mSum += materials;
+                mSum += materials*mResetBonus;
                 mTotalMoney.setText(String.valueOf(mSum));
                 break;
 
@@ -264,8 +272,12 @@ public class MainActivity extends AppCompatActivity {
                 mBull.setMaterialCounter(0);
                 mBeefTextView.setText(String.valueOf(0));
                 materials *= 3.5;
-                mSum += materials;
+                mSum += materials*mResetBonus;
                 mTotalMoney.setText(String.valueOf(mSum));
+                break;
+
+            case RESET_GAME:
+                resetGame();
                 break;
         }
     }
@@ -285,7 +297,7 @@ public class MainActivity extends AppCompatActivity {
         int categoryTimeout;
         int categoryCounter;
         int categoryPrice;
-        int categoryBonus;
+        double categoryBonus;
         boolean buyFarmer = (mAnimals / mFarmers) > 24;
         boolean buyLand = (mAnimals / mLands) > 99;
         boolean canBuyFactory = (mLands / mFactories) > 9;
@@ -380,10 +392,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "(" + mCow.getCounter() + "*" + mFactory.getCounter() + ")" + " + " + mCow.getMaterialCounter(), Toast.LENGTH_LONG).show();
                 mFactory.setCounter(++categoryCounter);
                 mFactory.setPrice(categoryPrice);
-
-
                 break;
 
+            /*
+             *TODO bonus for LAND?
+             * mResetBonus won't work for categoryBonus = 1 because of rounding
+             */
             case ID_LANDS:
                 categoryTimeout = mLand.getTimeout();
                 categoryCounter = mLand.getCounter();
@@ -399,8 +413,8 @@ public class MainActivity extends AppCompatActivity {
 
                 mLandTextView.setText(String.valueOf(categoryPrice));
                 callback = (counter) -> {
-                    mSum += categoryBonus;
-                    mTotalMoney.setText(String.valueOf(mSum));
+                    mSum += categoryBonus*mResetBonus;
+                    mTotalMoney.setText(String.valueOf((int)mSum));
                 };
                 mLand.setCounter(++categoryCounter);
                 mLand.setPrice(categoryPrice);
@@ -414,7 +428,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (mSum >= categoryPrice && !buyFarmer && !buyLand) {
                     mSum -= categoryPrice;
-                    categoryPrice += categoryCounter * 2;
+                    categoryPrice += categoryCounter*2;
                     mAnimals++;
                 } else {
                     if (buyFarmer)
@@ -429,8 +443,8 @@ public class MainActivity extends AppCompatActivity {
                 mChickens = initial;
                 callback = (counter) -> {
                     //mChickens++;
-                    mSum += categoryBonus;
-                    mTotalMoney.setText(String.valueOf(mSum));
+                    mSum += categoryBonus*mResetBonus;
+                    mTotalMoney.setText(String.valueOf((int)mSum));
                 };
                 mChicken.setCounter(++categoryCounter);
                 mChicken.setPrice(categoryPrice);
@@ -458,8 +472,8 @@ public class MainActivity extends AppCompatActivity {
 
                 mPigTextView.setText(String.valueOf(categoryPrice));
                 callback = (counter) -> {
-                    mSum += categoryBonus;
-                    mTotalMoney.setText(String.valueOf(mSum));
+                    mSum += categoryBonus*mResetBonus;
+                    mTotalMoney.setText(String.valueOf((int)mSum));
                 };
                 mPig.setCounter(++categoryCounter);
                 mPig.setPrice(categoryPrice);
@@ -487,8 +501,8 @@ public class MainActivity extends AppCompatActivity {
 
                 mSheepTextView.setText(String.valueOf(categoryPrice));
                 callback = (counter) -> {
-                    mSum += categoryBonus;
-                    mTotalMoney.setText(String.valueOf(mSum));
+                    mSum += categoryBonus*mResetBonus;
+                    mTotalMoney.setText(String.valueOf((int)mSum));
                 };
                 mSheep.setCounter(++categoryCounter);
                 mSheep.setPrice(categoryPrice);
@@ -516,8 +530,8 @@ public class MainActivity extends AppCompatActivity {
 
                 mCowTextView.setText(String.valueOf(categoryPrice));
                 callback = (counter) -> {
-                    mSum += categoryBonus;
-                    mTotalMoney.setText(String.valueOf(mSum));
+                    mSum += categoryBonus*mResetBonus;
+                    mTotalMoney.setText(String.valueOf((int)mSum));
                 };
                 mCow.setCounter(++categoryCounter);
                 mCow.setPrice(categoryPrice);
@@ -545,8 +559,8 @@ public class MainActivity extends AppCompatActivity {
 
                 mBullTextView.setText(String.valueOf(categoryPrice));
                 callback = (counter) -> {
-                    mSum += categoryBonus;
-                    mTotalMoney.setText(String.valueOf(mSum));
+                    mSum += categoryBonus*mResetBonus;
+                    mTotalMoney.setText(String.valueOf((int)mSum));
                 };
                 mBull.setCounter(++categoryCounter);
                 mBull.setPrice(categoryPrice);
@@ -623,5 +637,57 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             Log.e(TAG, "saveTimers failed", e);
         }
+    }
+
+    private void resetGame(){
+
+        HashMap<String, Integer> state = new HashMap<>();
+        for (HashMap.Entry<String, UiTimedEvent> entry : mTimedEvents.entrySet()) {
+            entry.getValue().stop();
+            //mTimedEvents.remove(entry.getKey());
+        }
+
+        mTimedEvents = new HashMap<>();
+
+        mFarmerTextView.setText("");
+        mFactoryTextView.setText("");
+        mLandTextView.setText("");
+        mChickenTextView.setText("");
+        mPigTextView.setText("");
+        mSheepTextView.setText("");
+        mCowTextView.setText("");
+        mBullTextView.setText("");
+        mAnimalsTextView.setText("");
+        mLandsTextView.setText("");
+        mEggsTextView.setText("");
+        mWoolTextView.setText("");
+        mMeatTextView.setText("");
+        mMilkTextView.setText("");
+        mBeefTextView.setText("");
+        mFactoriesTextView.setText("");
+        mTotalMoney.setText(String.valueOf(10));
+
+
+        mFarmer = new Categories(20, 1, 3000, 3);
+        mFactory = new Categories(2, 1, 10000, 50);
+        mLand = new Categories(1, 1, 5000, 2);
+        mChicken = new Categories(1, 1, 1000, 1);
+        mPig = new Categories(1, 0, 3000, 60);
+        mSheep = new Categories(35, 0, 2000, 50);
+        mCow = new Categories(80, 0, 5000, 70);
+        mBull = new Categories(200, 0, 6000, 200);
+
+        mSum = 10;
+        mAnimals = 1;
+        mFarmers = 1;
+        mLands = 1;
+        mFactories = 1;
+
+        mResetBonus += 0.02;
+
+        mPigFactory = false;
+        mSheepFactory = false;
+        mCowFactory = false;
+        mBullFactory = false;
     }
 }
