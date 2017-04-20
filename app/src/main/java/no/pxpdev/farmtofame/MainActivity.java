@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean mCowFactory;
     private boolean mBullFactory;
     private boolean mFactoryOn;
+    private boolean didReset;
 
     private SharedPreferences mCategoriesPreferences;
 
@@ -194,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
         restoreTimers();
 
         if(restoreCategories()) {
+            //Using this so snackbar in factories doesn't come up after reset
         } else {
             mFarmerTextView.setText("1");
             //mChickenTextView.setText("1");
@@ -208,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
             stopTimer(key);
         }*/
 
+        didReset = false;
         startTimer(key, 0);
     };
 
@@ -335,19 +338,18 @@ public class MainActivity extends AppCompatActivity {
                     mFactories++;
                     mFactoryOn = true;
                 } else {
-                    if (!canBuyFactory)
+                    if (!canBuyFactory && !didReset)
                         showSnackBar("Need to buy more land first");
-
-                    return false;
                 }
 
                 mFactoryTextView.setText(String.valueOf(categoryPrice));
                 mFactoriesTextView.setText(String.valueOf(mFactories));
+
                 callback = (counter) -> {
                     mSum += categoryBonus;
                     mTotalMoney.setText(String.valueOf(mSum));
 
-                    /**
+                    /*
                      * TODO Remove shitty booleans
                      */
 
@@ -626,6 +628,7 @@ public class MainActivity extends AppCompatActivity {
             ObjectInputStream ois = new ObjectInputStream(fis);
             @SuppressWarnings("unchecked")
             HashMap<String, Integer> state = (HashMap<String, Integer>) ois.readObject();
+            didReset = true;
             for (String key : state.keySet()) {
                 startTimer(key, state.get(key));
             }
