@@ -1,6 +1,7 @@
 package no.pxpdev.farmtofame;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.gson.Gson;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private HashMap<String, UiTimedEvent> mTimedEvents = new HashMap<>();
+    private HashMap<String, UiTimedEvent> mCategories = new HashMap<>();
 
     private TextView mFarmerTextView;
     private TextView mFactoryTextView;
@@ -62,22 +66,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView mMilkTextView;
     private TextView mBeefTextView;
 
-    private Button mBuyFarmer;
-    private Button mBuyFactory;
-    private Button mBuyLand;
-    private Button mBuyChicken;
-    private Button mBuyPig;
-    private Button mBuySheep;
-    private Button mBuyCow;
-    private Button mBuyBull;
-    private Button mSellEggs;
-    private Button mSellMeat;
-    private Button mSellWool;
-    private Button mSellMilk;
-    private Button mSellBeef;
-    private Button mResetGame;
-
-    private int mChickens;
     private double mSum = 10;
     private int mAnimals = 1;
     private int mFarmers = 1;
@@ -90,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean mSheepFactory;
     private boolean mCowFactory;
     private boolean mBullFactory;
+    private boolean mFactoryOn;
+
+    private SharedPreferences mCategoriesPreferences;
 
     private View mView;
 
@@ -131,67 +122,64 @@ public class MainActivity extends AppCompatActivity {
 
         mTotalMoney = (TextView) findViewById(R.id.total_money);
 
-        mFarmerTextView.setText("1");
-        //mChickenTextView.setText("1");
-        mLandTextView.setText("10");
-        mTotalMoney.setText("10");
+        mCategoriesPreferences = getPreferences(MODE_PRIVATE);
 
         //Set up Button listeners
-        mBuyFarmer = (Button) findViewById(R.id.buy_farmer);
-        mBuyFarmer.setTag(ID_FARMERS);
-        mBuyFarmer.setOnClickListener(mBuyListener);
+        Button buyFarmer = (Button) findViewById(R.id.buy_farmer);
+        buyFarmer.setTag(ID_FARMERS);
+        buyFarmer.setOnClickListener(mBuyListener);
 
-        mBuyFactory = (Button) findViewById(R.id.buy_factory);
-        mBuyFactory.setTag(ID_FACTORIES);
-        mBuyFactory.setOnClickListener(mBuyListener);
+        Button buyFactory = (Button) findViewById(R.id.buy_factory);
+        buyFactory.setTag(ID_FACTORIES);
+        buyFactory.setOnClickListener(mBuyListener);
 
-        mBuyLand = (Button) findViewById(R.id.buy_land);
-        mBuyLand.setTag(ID_LANDS);
-        mBuyLand.setOnClickListener(mBuyListener);
+        Button buyLand = (Button) findViewById(R.id.buy_land);
+        buyLand.setTag(ID_LANDS);
+        buyLand.setOnClickListener(mBuyListener);
 
-        mBuyChicken = (Button) findViewById(R.id.buy_chicken);
-        mBuyChicken.setTag(ID_CHICKENS);
-        mBuyChicken.setOnClickListener(mBuyListener);
+        Button buyChicken = (Button) findViewById(R.id.buy_chicken);
+        buyChicken.setTag(ID_CHICKENS);
+        buyChicken.setOnClickListener(mBuyListener);
 
-        mBuyPig = (Button) findViewById(R.id.buy_pig);
-        mBuyPig.setTag(ID_PIGS);
-        mBuyPig.setOnClickListener(mBuyListener);
+        Button buyPig = (Button) findViewById(R.id.buy_pig);
+        buyPig.setTag(ID_PIGS);
+        buyPig.setOnClickListener(mBuyListener);
 
-        mBuySheep = (Button) findViewById(R.id.buy_sheep);
-        mBuySheep.setTag(ID_SHEEPS);
-        mBuySheep.setOnClickListener(mBuyListener);
+        Button buySheep = (Button) findViewById(R.id.buy_sheep);
+        buySheep.setTag(ID_SHEEPS);
+        buySheep.setOnClickListener(mBuyListener);
 
-        mBuyCow = (Button) findViewById(R.id.buy_cow);
-        mBuyCow.setTag(ID_COWS);
-        mBuyCow.setOnClickListener(mBuyListener);
+        Button buyCow = (Button) findViewById(R.id.buy_cow);
+        buyCow.setTag(ID_COWS);
+        buyCow.setOnClickListener(mBuyListener);
 
-        mBuyBull = (Button) findViewById(R.id.buy_bull);
-        mBuyBull.setTag(ID_BULLS);
-        mBuyBull.setOnClickListener(mBuyListener);
+        Button buyBull = (Button) findViewById(R.id.buy_bull);
+        buyBull.setTag(ID_BULLS);
+        buyBull.setOnClickListener(mBuyListener);
 
-        mSellEggs = (Button) findViewById(R.id.sell_eggs_button);
-        mSellEggs.setTag(ID_EGGS);
-        mSellEggs.setOnClickListener(mSellListener);
+        Button sellEggs = (Button) findViewById(R.id.sell_eggs_button);
+        sellEggs.setTag(ID_EGGS);
+        sellEggs.setOnClickListener(mSellListener);
 
-        mSellMeat = (Button) findViewById(R.id.sell_meat_button);
-        mSellMeat.setTag(ID_MEAT);
-        mSellMeat.setOnClickListener(mSellListener);
+        Button sellMeat = (Button) findViewById(R.id.sell_meat_button);
+        sellMeat.setTag(ID_MEAT);
+        sellMeat.setOnClickListener(mSellListener);
 
-        mSellWool = (Button) findViewById(R.id.sell_wool_button);
-        mSellWool.setTag(ID_WOOL);
-        mSellWool.setOnClickListener(mSellListener);
+        Button sellWool = (Button) findViewById(R.id.sell_wool_button);
+        sellWool.setTag(ID_WOOL);
+        sellWool.setOnClickListener(mSellListener);
 
-        mSellMilk = (Button) findViewById(R.id.sell_milk_button);
-        mSellMilk.setTag(ID_MILK);
-        mSellMilk.setOnClickListener(mSellListener);
+        Button sellMilk = (Button) findViewById(R.id.sell_milk_button);
+        sellMilk.setTag(ID_MILK);
+        sellMilk.setOnClickListener(mSellListener);
 
-        mSellBeef = (Button) findViewById(R.id.sell_beef_button);
-        mSellBeef.setTag(ID_BEEF);
-        mSellBeef.setOnClickListener(mSellListener);
+        Button sellBeef = (Button) findViewById(R.id.sell_beef_button);
+        sellBeef.setTag(ID_BEEF);
+        sellBeef.setOnClickListener(mSellListener);
 
-        mResetGame = (Button) findViewById(R.id.reset_game);
-        mResetGame.setTag(RESET_GAME);
-        mResetGame.setOnClickListener(mSellListener);
+        Button resetGame = (Button) findViewById(R.id.reset_game);
+        resetGame.setTag(RESET_GAME);
+        resetGame.setOnClickListener(mSellListener);
 
         //Declare Category models
         mFarmer = new Categories(20, 1, 3000, 3);
@@ -204,6 +192,14 @@ public class MainActivity extends AppCompatActivity {
         mBull = new Categories(200, 0, 6000, 200);
 
         restoreTimers();
+
+        if(restoreCategories()) {
+        } else {
+            mFarmerTextView.setText("1");
+            //mChickenTextView.setText("1");
+            mLandTextView.setText("10");
+            mTotalMoney.setText("10");
+        }
     }
 
     private View.OnClickListener mBuyListener = v -> {
@@ -309,7 +305,6 @@ public class MainActivity extends AppCompatActivity {
                 categoryBonus = mFarmer.getCategoryBonus();
                 categoryPrice = mFarmer.getPrice();
 
-
                 if (mSum >= categoryPrice) {
                     mSum -= categoryPrice;
                     categoryPrice += ++categoryCounter * 2;
@@ -338,66 +333,69 @@ public class MainActivity extends AppCompatActivity {
                     mSum -= categoryPrice;
                     //categoryPrice += ++categoryCounter*2;
                     mFactories++;
+                    mFactoryOn = true;
                 } else {
                     if (!canBuyFactory)
                         showSnackBar("Need to buy more land first");
 
                     return false;
                 }
+
                 mFactoryTextView.setText(String.valueOf(categoryPrice));
                 mFactoriesTextView.setText(String.valueOf(mFactories));
                 callback = (counter) -> {
                     mSum += categoryBonus;
                     mTotalMoney.setText(String.valueOf(mSum));
 
-                    int materials;
-
-
-                    materials = (mChicken.getCounter() * mFactory.getCounter()) + mChicken.getMaterialCounter();
-                    mEggsTextView.setText(String.valueOf(materials));
-                    mChicken.setMaterialCounter(materials + 15);
-
-
                     /**
-                     * TODO Remove booleans?
+                     * TODO Remove shitty booleans
                      */
 
-                    if (mSheepFactory) {
-                        materials = (mSheep.getCounter() * mFactory.getCounter()) + mSheep.getMaterialCounter();
-                        mWoolTextView.setText(String.valueOf(materials));
-                        mSheep.setMaterialCounter(materials + 3);
+                    if(mFactoryOn) {
+
+                        int materials;
+
+                        materials = (mChicken.getCounter() * mFactory.getCounter()) + mChicken.getMaterialCounter();
+                        mEggsTextView.setText(String.valueOf(materials));
+                        mChicken.setMaterialCounter(materials + 15);
+
+                        if (mSheepFactory) {
+                            materials = (mSheep.getCounter() * mFactory.getCounter()) + mSheep.getMaterialCounter();
+                            mWoolTextView.setText(String.valueOf(materials));
+                            mSheep.setMaterialCounter(materials + 3);
+                        }
+
+                        if (mPigFactory) {
+                            materials = (mPig.getCounter() * mFactory.getCounter()) + mPig.getMaterialCounter();
+                            mMeatTextView.setText(String.valueOf(materials));
+                            mPig.setMaterialCounter(materials + 2);
+                        }
+
+                        if (mCowFactory) {
+                            materials = (mCow.getCounter() * mFactory.getCounter()) + mCow.getMaterialCounter();
+                            mMilkTextView.setText(String.valueOf(materials));
+                            mCow.setMaterialCounter(materials + 33);
+                        }
+
+                        if (mBullFactory) {
+                            materials = (mBull.getCounter() * mFactory.getCounter()) + mBull.getMaterialCounter();
+                            mBeefTextView.setText(String.valueOf(materials));
+                            mBull.setMaterialCounter(materials + 1);
+                        }
                     }
-
-                    if (mPigFactory) {
-                        materials = (mPig.getCounter() * mFactory.getCounter()) + mPig.getMaterialCounter();
-                        mMeatTextView.setText(String.valueOf(materials));
-                        mPig.setMaterialCounter(materials + 2);
-                    }
-
-                    if (mCowFactory) {
-                        materials = (mCow.getCounter() * mFactory.getCounter()) + mCow.getMaterialCounter();
-                        mMilkTextView.setText(String.valueOf(materials));
-                        mCow.setMaterialCounter(materials + 33);
-                    }
-
-                    if (mBullFactory) {
-                        materials = (mBull.getCounter() * mFactory.getCounter()) + mBull.getMaterialCounter();
-                        mBeefTextView.setText(String.valueOf(materials));
-                        mBull.setMaterialCounter(materials + 1);
-                    }
-
-
                 };
                 /**Set this before callback?... **/
                 Toast.makeText(MainActivity.this, "(" + mCow.getCounter() + "*" + mFactory.getCounter() + ")" + " + " + mCow.getMaterialCounter(), Toast.LENGTH_LONG).show();
                 mFactory.setCounter(++categoryCounter);
                 mFactory.setPrice(categoryPrice);
+
                 break;
 
             /*
              *TODO bonus for LAND?
              * mResetBonus won't work for categoryBonus = 1 because of rounding
              */
+
             case ID_LANDS:
                 categoryTimeout = mLand.getTimeout();
                 categoryCounter = mLand.getCounter();
@@ -440,7 +438,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 mChickenTextView.setText(String.valueOf(categoryPrice));
-                mChickens = initial;
+                int chickens = initial;
                 callback = (counter) -> {
                     //mChickens++;
                     mSum += categoryBonus*mResetBonus;
@@ -603,6 +601,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         saveTimers();
+        saveCategories();
     }
 
     private void saveTimers() {
@@ -639,9 +638,150 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void saveCategories(){
+
+        SharedPreferences.Editor editor  = mCategoriesPreferences.edit();
+        Gson gson = new Gson();
+
+        String farmerJson = gson.toJson(mFarmer);
+        editor.putString("farmer", farmerJson);
+
+        String factoryJson = gson.toJson(mFactory);
+        editor.putString("factory", factoryJson);
+
+        String landJson = gson.toJson(mLand);
+        editor.putString("land", landJson);
+
+        String chickenJson = gson.toJson(mChicken);
+        editor.putString("chicken", chickenJson);
+
+        String pigJson = gson.toJson(mPig);
+        editor.putString("pig", pigJson);
+
+        String sheepJson = gson.toJson(mSheep);
+        editor.putString("sheep", sheepJson);
+
+        String cowJson = gson.toJson(mCow);
+        editor.putString("cow", cowJson);
+
+        String bullJson = gson.toJson(mBull);
+        editor.putString("bull", bullJson);
+
+        editor.putInt("sum", (int)mSum);
+
+        editor.putInt("animals", mAnimals);
+
+        editor.putInt("farmers", mFarmers);
+
+        editor.putInt("lands", mLands);
+
+        editor.putInt("factories", mFactories);
+
+        editor.putLong("resetBonus", Double.doubleToRawLongBits(mResetBonus));
+
+        editor.putBoolean("pigfactory", mPigFactory);
+        editor.putBoolean("sheepfactory", mSheepFactory);
+        editor.putBoolean("cowfactory", mCowFactory);
+        editor.putBoolean("bullfactory", mBullFactory);
+        editor.putBoolean("factoryon", mFactoryOn);
+
+
+        editor.apply();
+
+    }
+
+    private boolean restoreCategories() {
+
+        /**
+         * TODO dat null checks..
+         */
+
+        Gson gson = new Gson();
+
+        String farmerJson = mCategoriesPreferences.getString("farmer", null);
+        if(farmerJson == null)
+            return false;
+        mFarmer = gson.fromJson(farmerJson, Categories.class);
+
+
+        String factoryJson = mCategoriesPreferences.getString("factory", null);
+        if(factoryJson == null)
+            return false;
+        mFactory = gson.fromJson(factoryJson, Categories.class);
+
+        String landJson = mCategoriesPreferences.getString("land", null);
+        if(landJson == null)
+            return false;
+        mLand = gson.fromJson(landJson, Categories.class);
+
+
+        String chickenJson = mCategoriesPreferences.getString("chicken", null);
+        if(chickenJson == null)
+            return false;
+        mChicken = gson.fromJson(chickenJson, Categories.class);
+
+
+        String pigJson = mCategoriesPreferences.getString("pig", null);
+        if(pigJson == null)
+            return false;
+        mPig = gson.fromJson(pigJson, Categories.class);
+
+        String sheepJson = mCategoriesPreferences.getString("sheep", null);
+        if(sheepJson == null)
+            return false;
+        mSheep = gson.fromJson(sheepJson, Categories.class);
+
+        String cowJson = mCategoriesPreferences.getString("cow", null);
+        if(cowJson == null)
+            return false;
+        mCow = gson.fromJson(cowJson, Categories.class);
+
+        String bullJson = mCategoriesPreferences.getString("bull", null);
+        if(bullJson == null)
+            return false;
+        mBull = gson.fromJson(bullJson, Categories.class);
+
+        mSum = mCategoriesPreferences.getInt("sum", 0);
+
+        mFarmerTextView.setText(String.valueOf(mFarmer.getPrice()));
+        mFactoryTextView.setText(String.valueOf(mFactory.getPrice()));
+        mLandsTextView.setText(String.valueOf(mFactory.getPrice()));
+        mChickenTextView.setText(String.valueOf(mChicken.getPrice()));
+        mPigTextView.setText(String.valueOf(mPig.getPrice()));
+        mSheepTextView.setText(String.valueOf(mSheep.getPrice()));
+        mCowTextView.setText(String.valueOf(mCow.getPrice()));
+        mBullTextView.setText(String.valueOf(mBull.getPrice()));
+
+        mFactoriesTextView.setText(String.valueOf(mFactory.getCounter()));
+        mLandsTextView.setText(String.valueOf(mLand.getCounter()));
+
+        mAnimals = mCategoriesPreferences.getInt("animals", 0);
+        mAnimalsTextView.setText(String.valueOf(mAnimals));
+
+        mEggsTextView.setText(String.valueOf(mChicken.getMaterialCounter()));
+        //TODO change meat to bacon
+        mMeatTextView.setText(String.valueOf(mPig.getMaterialCounter()));
+        mWoolTextView.setText(String.valueOf(mSheep.getMaterialCounter()));
+        mMilkTextView.setText(String.valueOf(mCow.getMaterialCounter()));
+        mBeefTextView.setText(String.valueOf(mBull.getMaterialCounter()));
+
+
+        mFarmers = mCategoriesPreferences.getInt("farmers", 1);
+        mLands = mCategoriesPreferences.getInt("lands", 1);
+        mFactories = mCategoriesPreferences.getInt("factories", 1);
+        mResetBonus = Double.longBitsToDouble(mCategoriesPreferences.getLong("resetBonus", Double.doubleToLongBits(1)));
+
+        mPigFactory = mCategoriesPreferences.getBoolean("pigfactory", false);
+        mSheepFactory = mCategoriesPreferences.getBoolean("sheepfactory", false);
+        mCowFactory = mCategoriesPreferences.getBoolean("cowfactory", false);
+        mBullFactory = mCategoriesPreferences.getBoolean("bullfactory", false);
+        mFactoryOn = mCategoriesPreferences.getBoolean("factoryon", false);
+
+        return true;
+    }
+
     private void resetGame(){
 
-        HashMap<String, Integer> state = new HashMap<>();
         for (HashMap.Entry<String, UiTimedEvent> entry : mTimedEvents.entrySet()) {
             entry.getValue().stop();
             //mTimedEvents.remove(entry.getKey());
