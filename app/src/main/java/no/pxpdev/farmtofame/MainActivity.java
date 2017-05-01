@@ -5,14 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.google.gson.Gson;
@@ -65,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mEggsTextView;
     private TextView mFactoriesTextView;
     private TextView mWoolTextView;
-    private TextView mMeatTextView;
+    private TextView mBaconTextView;
     private TextView mMilkTextView;
     private TextView mBeefTextView;
 
@@ -77,11 +75,11 @@ public class MainActivity extends AppCompatActivity {
     private Button mBuySheep;
     private Button mBuyCow;
     private Button mBuyBull;
-    private Button mSellEggs;
-    private Button mSellMeat;
-    private Button mSellWool;
-    private Button mSellMilk;
-    private Button mSellBeef;
+    private TextView mSellEggs;
+    private TextView mSellBacon;
+    private TextView mSellWool;
+    private TextView mSellMilk;
+    private TextView mSellBeef;
     private Button mResetGame;
 
     private float mSum = 10;
@@ -133,21 +131,20 @@ public class MainActivity extends AppCompatActivity {
 
         //Set up statistic Views
         mFarmerTextView = (TextView) findViewById(R.id.farmer_income);
-        mFactoryTextView = (TextView) findViewById(R.id.factory_money);
-        mLandTextView = (TextView) findViewById(R.id.land_size);
-        mChickenTextView = (TextView) findViewById(R.id.chicken_money);
-        mPigTextView = (TextView) findViewById(R.id.pig_money);
-        mSheepTextView = (TextView) findViewById(R.id.sheep_money);
-        mCowTextView = (TextView) findViewById(R.id.cow_money);
-        mBullTextView = (TextView) findViewById(R.id.bull_money);
-        mAnimalsTextView = (TextView) findViewById(R.id.animals_counter_text_view);
-        mLandsTextView = (TextView) findViewById(R.id.lands_counter_text_view);
-        mEggsTextView = (TextView) findViewById(R.id.egg_counter_text_view);
-        mWoolTextView = (TextView) findViewById(R.id.wool_counter_text_view);
-        mMeatTextView = (TextView) findViewById(R.id.meat_counter_text_view);
-        mMilkTextView = (TextView) findViewById(R.id.milk_counter_text_view);
-        mBeefTextView = (TextView) findViewById(R.id.beef_counter_text_view);
-        mFactoriesTextView = (TextView) findViewById(R.id.factory_counter_text_view);
+        mFactoryTextView = (TextView) findViewById(R.id.factory_income);
+        mLandTextView = (TextView) findViewById(R.id.land_income);
+        mChickenTextView = (TextView) findViewById(R.id.chicken_income);
+        mPigTextView = (TextView) findViewById(R.id.pig_income);
+        mSheepTextView = (TextView) findViewById(R.id.sheep_income);
+        mCowTextView = (TextView) findViewById(R.id.cow_income);
+        mBullTextView = (TextView) findViewById(R.id.bull_income);
+        mLandsTextView = (TextView) findViewById(R.id.land_counter);
+        mEggsTextView = (TextView) findViewById(R.id.egg_icon);
+        mWoolTextView = (TextView) findViewById(R.id.wool_icon);
+        mBaconTextView = (TextView) findViewById(R.id.bacon_icon);
+        mMilkTextView = (TextView) findViewById(R.id.milk_icon);
+        mBeefTextView = (TextView) findViewById(R.id.beef_icon);
+        mFactoriesTextView = (TextView) findViewById(R.id.factory_counter);
 
         mTotalMoney = (TextView) findViewById(R.id.total_money);
 
@@ -186,29 +183,26 @@ public class MainActivity extends AppCompatActivity {
         mBuyBull.setTag(ID_BULLS);
         mBuyBull.setOnClickListener(mBuyListener);
 
-        mSellEggs = (Button) findViewById(R.id.sell_eggs_button);
+        mSellEggs = (TextView) findViewById(R.id.sell_eggs);
         mSellEggs.setTag(ID_EGGS);
         mSellEggs.setOnClickListener(mSellListener);
 
-        mSellMeat = (Button) findViewById(R.id.sell_meat_button);
-        mSellMeat.setTag(ID_MEAT);
-        mSellMeat.setOnClickListener(mSellListener);
+        mSellBacon = (TextView) findViewById(R.id.sell_bacon);
+        mSellBacon.setTag(ID_MEAT);
+        mSellBacon.setOnClickListener(mSellListener);
 
-        mSellWool = (Button) findViewById(R.id.sell_wool_button);
+        mSellWool = (TextView) findViewById(R.id.sell_wool);
         mSellWool.setTag(ID_WOOL);
         mSellWool.setOnClickListener(mSellListener);
 
-        mSellMilk = (Button) findViewById(R.id.sell_milk_button);
+        mSellMilk = (TextView) findViewById(R.id.sell_milk);
         mSellMilk.setTag(ID_MILK);
         mSellMilk.setOnClickListener(mSellListener);
 
-        mSellBeef = (Button) findViewById(R.id.sell_beef_button);
+        mSellBeef = (TextView) findViewById(R.id.sell_beef);
         mSellBeef.setTag(ID_BEEF);
         mSellBeef.setOnClickListener(mSellListener);
 
-        mResetGame = (Button) findViewById(R.id.reset_game);
-        mResetGame.setTag(RESET_GAME);
-        mResetGame.setOnClickListener(mSellListener);
 
         //Declare Category models
         mFarmer = new Categories(20, 1, 3000, 3);
@@ -269,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
             case ID_MEAT:
                 materials = mPig.getMaterialCounter();
                 mPig.setMaterialCounter(0);
-                mMeatTextView.setText(String.valueOf(0));
+                mBaconTextView.setText(String.valueOf(0));
                 materials *= 2.1;
                 mSum += materials*mResetBonus;
                 mTotalMoney.setText(String.format("%.2f", mSum));
@@ -410,7 +404,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if (mPigFactory) {
                             materials = (mPig.getCounter() * mFactory.getCounter()) + mPig.getMaterialCounter();
-                            mMeatTextView.setText(String.valueOf(materials));
+                            mBaconTextView.setText(String.valueOf(materials));
                             mPig.setMaterialCounter(materials + 2);
                         }
 
@@ -687,7 +681,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
         }
 
-        mAnimalsTextView.setText(String.valueOf(mAnimals));
+        //mAnimalsTextView.setText(String.valueOf(mAnimals));
         mLandsTextView.setText(String.valueOf(mLands));
 
         if (mTimedEvents.containsKey(id)) {
@@ -905,7 +899,7 @@ public class MainActivity extends AppCompatActivity {
 
         mEggsTextView.setText(String.valueOf(mChicken.getMaterialCounter()));
         //TODO change meat to bacon
-        mMeatTextView.setText(String.valueOf(mPig.getMaterialCounter()));
+        mBaconTextView.setText(String.valueOf(mPig.getMaterialCounter()));
         mWoolTextView.setText(String.valueOf(mSheep.getMaterialCounter()));
         mMilkTextView.setText(String.valueOf(mCow.getMaterialCounter()));
         mBeefTextView.setText(String.valueOf(mBull.getMaterialCounter()));
@@ -946,7 +940,7 @@ public class MainActivity extends AppCompatActivity {
         mLandsTextView.setText("");
         mEggsTextView.setText("");
         mWoolTextView.setText("");
-        mMeatTextView.setText("");
+        mBaconTextView.setText("");
         mMilkTextView.setText("");
         mBeefTextView.setText("");
         mFactoriesTextView.setText("");

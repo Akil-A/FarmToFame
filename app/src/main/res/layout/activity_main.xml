@@ -18,591 +18,610 @@
 		android:textSize="15pt"
 		android:layout_marginBottom="12dp"
 		/>
-
-
-	<RelativeLayout
+	<ScrollView
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:paddingLeft="20dp"
+		android:layout_height="match_parent"
 		>
-
-		<ImageView
-			android:id="@+id/farmer_icon"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/farmer_icon"
-			/>
-		<TextView
-			android:id="@+id/farmer_button"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignBottom="@id/farmer_icon"
-			android:layout_marginBottom="11dp"
-			android:background="@drawable/animal_score"
-			android:gravity="center"
-			android:text="102"
-			android:textColor="@android:color/white"
-			/>
-
-		<Button
-			android:id="@+id/buy_farmer"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignBottom="@+id/farmer_icon"
-			android:layout_toEndOf="@+id/farmer_button"
-			android:background="@drawable/buy_button"
-			/>
-
-
-		<TextView
-			android:id="@+id/farmer_income"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/farmer_income"
-			android:layout_alignParentTop="true"
-			android:layout_alignStart="@+id/buy_farmer"
-			/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/clock"
-			android:layout_above="@+id/farmer_button"
-			android:layout_toEndOf="@+id/buy_farmer"
-			/>
-
-	</RelativeLayout>
-
-
-	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:paddingLeft="20dp"
-		>
-
-		<ImageView
-			android:id="@+id/factory_icon"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/factory_icon"
-			/>
-		<TextView
-			android:id="@+id/factory_button"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignBottom="@id/factory_icon"
-			android:layout_marginBottom="11dp"
-			android:background="@drawable/animal_score"
-			android:gravity="center"
-			android:text="102"
-			android:textColor="@android:color/white"
-			/>
-
-		<Button
-			android:id="@+id/buy_factory"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignBottom="@+id/factory_icon"
-			android:layout_toEndOf="@+id/factory_button"
-			android:background="@drawable/buy_button"
-			/>
-
-
-		<TextView
-			android:id="@+id/factory_income"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/farmer_income"
-			android:layout_alignParentTop="true"
-			android:layout_alignStart="@+id/buy_factory"
-			/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/clock"
-			android:layout_above="@+id/factory_button"
-			android:layout_toEndOf="@+id/buy_factory"
-			/>
-
-	</RelativeLayout>
-
-	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:paddingLeft="20dp"
-		>
-
-		<ImageView
-			android:id="@+id/land_icon"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/land_icon"
-			/>
-		<TextView
-			android:id="@+id/land_button"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignBottom="@id/land_icon"
-			android:layout_marginBottom="11dp"
-			android:background="@drawable/animal_score"
-			android:gravity="center"
-			android:text="102"
-			android:textColor="@android:color/white"
-			/>
-
-		<Button
-			android:id="@+id/buy_land"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignBottom="@+id/land_icon"
-			android:layout_toEndOf="@+id/land_button"
-			android:background="@drawable/buy_button"
-			/>
-
-
-		<TextView
-			android:id="@+id/land_income"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentTop="true"
-			android:layout_alignStart="@+id/buy_land"
-			android:background="@drawable/farmer_income"
-			/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_above="@+id/land_button"
-			android:layout_toEndOf="@+id/buy_land"
-			android:background="@drawable/clock"
-			/>
-
-	</RelativeLayout>
-
-	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:paddingLeft="20dp"
-		>
-
-		<ImageView
-			android:id="@+id/chicken_icon"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/chicken_icon"
-			/>
-
-		<ImageView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/eggs_icon"
-			android:layout_alignParentTop="true"
-			android:layout_toStartOf="@+id/buy_chicken"
-			android:layout_marginEnd="13dp"
-			/>
-
-		<TextView
-			android:id="@+id/chicken_button"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignBottom="@id/chicken_icon"
-			android:layout_marginBottom="11dp"
-			android:background="@drawable/animal_score"
-			android:gravity="center"
-			android:text="102"
-			android:textColor="@android:color/white"
-			/>
-
-		<Button
-			android:id="@+id/buy_chicken"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignBottom="@+id/chicken_icon"
-			android:layout_toEndOf="@+id/chicken_button"
-			android:background="@drawable/buy_button"
-			/>
-
-
-		<TextView
-			android:id="@+id/chicken_income"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentTop="true"
-			android:layout_alignStart="@+id/buy_chicken"
-			android:background="@drawable/farmer_income"
-			/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_above="@+id/chicken_button"
-			android:layout_toEndOf="@+id/buy_chicken"
-			android:background="@drawable/clock"
-			/>
-
-	</RelativeLayout>
-
-	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:paddingLeft="20dp"
-		>
-
-		<ImageView
-			android:id="@+id/pig_icon"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/pig_icon"
-			/>
-
-		<ImageView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/bacon_icon"
-			android:layout_alignParentTop="true"
-			android:layout_toStartOf="@+id/buy_pig"
-			android:layout_marginEnd="13dp"
-			/>
-
-		<TextView
-			android:id="@+id/pig_button"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignBottom="@id/pig_icon"
-			android:layout_marginBottom="11dp"
-			android:background="@drawable/animal_score"
-			android:gravity="center"
-			android:text="102"
-			android:textColor="@android:color/white"
-			/>
-
-		<Button
-			android:id="@+id/buy_pig"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignBottom="@+id/pig_icon"
-			android:layout_toEndOf="@+id/pig_button"
-			android:background="@drawable/buy_button"
-			/>
-
-
-		<TextView
-			android:id="@+id/pig_income"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentTop="true"
-			android:layout_alignStart="@+id/buy_pig"
-			android:background="@drawable/farmer_income"
-			/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_above="@+id/pig_button"
-			android:layout_toEndOf="@+id/buy_pig"
-			android:background="@drawable/clock"
-			/>
-
-	</RelativeLayout>
-
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:gravity="center_horizontal"
-		android:weightSum="12"
-		>
-
-		<Button
-			android:id="@+id/cow_button"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="4"
-			android:text="@string/cow"
-			/>
-
-		<TextView
-			android:id="@+id/cow_money"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="2"
-			android:gravity="center_horizontal"
-			android:text="@string/dollars"
-			/>
-
-		<Button
-			android:id="@+id/buy_cow"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="4"
-			android:text="@string/buy_cow"
-			/>
-	</LinearLayout>
-
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:gravity="center_horizontal"
-		android:weightSum="12"
-		>
-
-		<Button
-			android:id="@+id/bull_button"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="4"
-			android:text="@string/bull"
-			/>
-
-		<TextView
-			android:id="@+id/bull_money"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="2"
-			android:gravity="center_horizontal"
-			android:text="@string/dollars"
-			/>
-
-		<Button
-			android:id="@+id/buy_bull"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="4"
-			android:text="@string/buy_bull"
-			/>
-	</LinearLayout>
-
-	<LinearLayout
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		>
-
 		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
 			android:orientation="vertical"
-			android:layout_gravity="start"
-			>
-			<TextView
-				android:id="@+id/animals_text"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="start"
-				android:textSize="12sp"
-				android:text="Animals "
-				/>
-
-			<TextView
-				android:id="@+id/animals_counter_text_view"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="start"
-				android:textSize="12sp"
-				android:text="       x"
-				/>
-
-			<TextView
-				android:id="@+id/lands_text"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="start"
-				android:textSize="12sp"
-				android:text="Lands "
-				/>
-
-			<TextView
-				android:id="@+id/lands_counter_text_view"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="start"
-				android:textSize="12sp"
-				android:text="     x"
-				/>
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			android:layout_gravity="center_horizontal"
-			android:layout_marginLeft="30dp">
-			<TextView
-				android:id="@+id/eggs_text"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="top|center_horizontal"
-				android:textSize="12sp"
-				android:text="Eggs "
-				/>
-
-			<TextView
-				android:id="@+id/egg_counter_text_view"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="12sp"
-				android:text="    x"
-				/>
-
-			<TextView
-				android:id="@+id/meat_text"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="12sp"
-				android:text="Meats "
-				/>
-
-			<TextView
-				android:id="@+id/meat_counter_text_view"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="12sp"
-				android:text="    x"
-				/>
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			android:layout_gravity="center_horizontal"
-			android:layout_marginLeft="30dp">
-			<TextView
-				android:id="@+id/wool_text"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="top|center_horizontal"
-				android:textSize="12sp"
-				android:text="Wool "
-				/>
-
-			<TextView
-				android:id="@+id/wool_counter_text_view"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="12sp"
-				android:text="    x"
-				/>
-
-			<TextView
-				android:id="@+id/milk_text"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="12sp"
-				android:text="Milk "
-				/>
-
-			<TextView
-				android:id="@+id/milk_counter_text_view"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="12sp"
-				android:text="    x"
-				/>
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			android:layout_gravity="center_horizontal"
-			android:layout_marginLeft="30dp">
-			<TextView
-				android:id="@+id/beef_text"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="top|center_horizontal"
-				android:textSize="12sp"
-				android:text="Beef "
-				/>
-
-			<TextView
-				android:id="@+id/beef_counter_text_view"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="12sp"
-				android:text="        x"
-				/>
-
-			<TextView
-				android:id="@+id/factory_text"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="top|center_horizontal"
-				android:textSize="12sp"
-				android:text="Factories "
-				/>
-
-			<TextView
-				android:id="@+id/factory_counter_text_view"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textSize="12sp"
-				android:text="        x"/>
-
-		</LinearLayout>
-
-
-	</LinearLayout>
-
-	<LinearLayout
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-	android:orientation="vertical">
-
-		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:paddingLeft="30dp"
 			>
 
-			<Button
-				android:id="@+id/sell_eggs_button"
+			<RelativeLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Sell Eggs"
-				/>
+				android:paddingBottom="6dp"
+				android:paddingLeft="20dp"
+				android:paddingTop="6dp"
+				>
 
-			<Button
-				android:id="@+id/sell_meat_button"
+				<ImageView
+					android:id="@+id/farmer_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentStart="true"
+					android:layout_alignParentTop="true"
+					android:background="@drawable/farmer_icon"
+					/>
+				<TextView
+					android:id="@+id/farmer_counter"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignBottom="@id/farmer_icon"
+					android:background="@drawable/category_count"
+					android:gravity="center"
+					android:text="102"
+					android:textColor="@android:color/white"
+					/>
+
+				<Button
+					android:id="@+id/buy_farmer"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@+id/farmer_income"
+					android:layout_toEndOf="@+id/farmer_icon"
+					android:background="@drawable/buy_button"
+					/>
+
+
+				<TextView
+					android:id="@+id/farmer_income"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_marginEnd="14dp"
+					android:layout_toEndOf="@+id/farmer_icon"
+					android:background="@drawable/income_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
+					/>
+
+				<TextView
+					android:id="@+id/clock_farmer"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/farmer_income"
+					android:layout_toEndOf="@+id/buy_farmer"
+					android:background="@drawable/clock_icon"
+					/>
+
+			</RelativeLayout>
+
+
+			<RelativeLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Sell Meat"
-				/>
+				android:paddingBottom="6dp"
+				android:paddingLeft="20dp"
+				android:paddingTop="6dp"
+				>
 
-		<Button
-			android:id="@+id/sell_wool_button"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="Sell Wool"
-			/>
+				<ImageView
+					android:id="@+id/factory_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentStart="true"
+					android:layout_alignParentTop="true"
+					android:background="@drawable/factory_icon"
+					/>
+				<TextView
+					android:id="@+id/factory_counter"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignBottom="@id/factory_icon"
+					android:background="@drawable/category_count"
+					android:gravity="center"
+					android:text="102"
+					android:textColor="@android:color/white"
+					/>
+
+				<Button
+					android:id="@+id/buy_factory"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@+id/factory_income"
+					android:layout_toEndOf="@+id/factory_icon"
+					android:background="@drawable/buy_button"
+					/>
+
+
+				<TextView
+					android:id="@+id/factory_income"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_marginEnd="14dp"
+					android:layout_toEndOf="@+id/factory_icon"
+					android:background="@drawable/income_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
+					/>
+
+				<TextView
+					android:id="@+id/clock_factory"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/factory_income"
+					android:layout_toEndOf="@+id/buy_factory"
+					android:background="@drawable/clock_icon"
+					/>
+
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingBottom="6dp"
+				android:paddingLeft="20dp"
+				android:paddingTop="6dp"
+				>
+
+				<ImageView
+					android:id="@+id/land_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentStart="true"
+					android:layout_alignParentTop="true"
+					android:background="@drawable/land_icon"
+					/>
+				<TextView
+					android:id="@+id/land_counter"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignBottom="@id/land_icon"
+					android:background="@drawable/category_count"
+					android:gravity="center"
+					android:text="102"
+					android:textColor="@android:color/white"
+					/>
+
+				<Button
+					android:id="@+id/buy_land"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@+id/land_income"
+					android:layout_toEndOf="@+id/land_icon"
+					android:background="@drawable/buy_button"
+					/>
+
+
+				<TextView
+					android:id="@+id/land_income"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_marginEnd="14dp"
+					android:layout_toEndOf="@+id/land_icon"
+					android:background="@drawable/income_icon"
+					/>
+
+				<TextView
+					android:id="@+id/clock_land"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/land_income"
+					android:layout_toEndOf="@+id/buy_land"
+					android:background="@drawable/clock_icon"
+					/>
+
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingBottom="6dp"
+				android:paddingLeft="20dp"
+				android:paddingTop="6dp"
+				>
+
+				<ImageView
+					android:id="@+id/chicken_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentStart="true"
+					android:layout_alignParentTop="true"
+					android:layout_marginTop="10dp"
+					android:background="@drawable/chicken_icon"
+					/>
+
+				<TextView
+					android:id="@+id/egg_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_marginEnd="13dp"
+					android:layout_toStartOf="@+id/buy_chicken"
+					android:background="@drawable/egg_icon"
+					android:gravity="bottom|center"
+					android:textColor="@android:color/white"
+				    android:text="123"
+					/>
+
+				<TextView
+					android:id="@+id/chicken_counter"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignBottom="@id/chicken_icon"
+					android:background="@drawable/category_count"
+					android:gravity="center"
+					android:text="102"
+					android:textColor="@android:color/white"
+					/>
+
+				<Button
+					android:id="@+id/buy_chicken"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@+id/chicken_income"
+					android:layout_toEndOf="@+id/chicken_icon"
+					android:background="@drawable/buy_button"
+					/>
+
+
+				<TextView
+					android:id="@+id/chicken_income"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_marginEnd="14dp"
+					android:layout_toEndOf="@+id/chicken_icon"
+					android:background="@drawable/income_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
+					/>
+
+				<TextView
+					android:id="@+id/clock_chicken"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_toEndOf="@+id/buy_chicken"
+					android:background="@drawable/clock_icon"
+					/>
+
+				<TextView
+					android:id="@+id/sell_eggs"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+				    android:background="@drawable/sell_material_icon"
+					android:layout_below="@+id/clock_chicken"
+					android:layout_toEndOf="@+id/buy_chicken"
+					/>
+
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingBottom="6dp"
+				android:paddingLeft="20dp"
+				android:paddingTop="6dp"
+				>
+
+				<ImageView
+					android:id="@+id/pig_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentStart="true"
+					android:layout_alignParentTop="true"
+					android:layout_marginTop="10dp"
+					android:background="@drawable/pig_icon"
+					/>
+
+				<TextView
+					android:id="@+id/bacon_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_marginEnd="13dp"
+					android:layout_toStartOf="@+id/buy_pig"
+					android:background="@drawable/bacon_icon"
+					android:gravity="bottom|center"
+					android:textColor="@android:color/white"
+					android:text="123"
+					/>
+
+				<TextView
+					android:id="@+id/pig_counter"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignBottom="@id/pig_icon"
+					android:background="@drawable/category_count"
+					android:gravity="center"
+					android:text="102"
+					android:textColor="@android:color/white"
+					/>
+
+				<Button
+					android:id="@+id/buy_pig"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@+id/pig_income"
+					android:layout_toEndOf="@+id/pig_icon"
+					android:background="@drawable/buy_button"
+					/>
+
+
+				<TextView
+					android:id="@+id/pig_income"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_marginEnd="14dp"
+					android:layout_toEndOf="@+id/pig_icon"
+					android:background="@drawable/income_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
+					/>
+
+				<TextView
+					android:id="@+id/clock_pig"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_toEndOf="@+id/buy_pig"
+					android:background="@drawable/clock_icon"
+					/>
+
+				<TextView
+					android:id="@+id/sell_bacon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/sell_material_icon"
+					android:layout_below="@+id/clock_pig"
+					android:layout_toEndOf="@+id/buy_pig"
+					/>
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingBottom="6dp"
+				android:paddingLeft="20dp"
+				android:paddingTop="6dp"
+				>
+
+				<ImageView
+					android:id="@+id/sheep_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentStart="true"
+					android:layout_alignParentTop="true"
+					android:layout_marginTop="16dp"
+					android:background="@drawable/sheep_icon"
+					/>
+
+				<TextView
+					android:id="@+id/wool_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_marginEnd="13dp"
+					android:layout_toStartOf="@+id/buy_sheep"
+					android:background="@drawable/wool_icon"
+					android:gravity="bottom|center"
+					android:textColor="@android:color/white"
+					android:text="123"
+					/>
+
+				<TextView
+					android:id="@+id/sheep_counter"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignBottom="@id/sheep_icon"
+					android:background="@drawable/category_count"
+					android:gravity="center"
+					android:text="102"
+					android:textColor="@android:color/white"
+					/>
+
+				<Button
+					android:id="@+id/buy_sheep"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@+id/sheep_income"
+					android:layout_toEndOf="@+id/sheep_icon"
+					android:background="@drawable/buy_button"
+					/>
+
+
+				<TextView
+					android:id="@+id/sheep_income"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_marginEnd="14dp"
+					android:layout_toEndOf="@+id/sheep_icon"
+					android:background="@drawable/income_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
+					/>
+
+				<TextView
+					android:id="@+id/clock_sheep"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_toEndOf="@+id/buy_sheep"
+					android:background="@drawable/clock_icon"
+					/>
+
+				<TextView
+					android:id="@+id/sell_wool"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/sell_material_icon"
+					android:layout_below="@+id/clock_sheep"
+					android:layout_toEndOf="@+id/buy_sheep"
+					/>
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingBottom="6dp"
+				android:paddingLeft="20dp"
+				android:paddingTop="6dp"
+				>
+
+				<ImageView
+					android:id="@+id/cow_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentStart="true"
+					android:layout_alignParentTop="true"
+					android:layout_marginTop="16dp"
+					android:background="@drawable/cow_icon"
+					/>
+
+				<TextView
+					android:id="@+id/milk_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_marginEnd="13dp"
+					android:layout_toStartOf="@+id/buy_cow"
+					android:background="@drawable/milk_icon"
+					android:gravity="bottom|center"
+					android:textColor="@android:color/white"
+					android:text="123"
+					/>
+
+				<TextView
+					android:id="@+id/cow_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignBottom="@id/cow_icon"
+					android:background="@drawable/category_count"
+					android:gravity="center"
+					android:text="102"
+					android:textColor="@android:color/white"
+					/>
+
+				<Button
+					android:id="@+id/buy_cow"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@+id/cow_income"
+					android:layout_toEndOf="@+id/cow_icon"
+					android:background="@drawable/buy_button"
+					/>
+
+
+				<TextView
+					android:id="@+id/cow_income"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_marginEnd="14dp"
+					android:layout_toEndOf="@+id/cow_icon"
+					android:background="@drawable/income_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
+					/>
+
+				<TextView
+					android:id="@+id/clock_cow"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_toEndOf="@+id/buy_cow"
+					android:background="@drawable/clock_icon"
+					/>
+
+				<TextView
+					android:id="@+id/sell_milk"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/sell_material_icon"
+					android:layout_below="@+id/clock_cow"
+					android:layout_toEndOf="@+id/buy_cow"
+					/>
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingBottom="6dp"
+				android:paddingLeft="20dp"
+				android:paddingTop="6dp"
+				>
+
+				<ImageView
+					android:id="@+id/bull_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentStart="true"
+					android:layout_alignParentTop="true"
+					android:layout_marginTop="16dp"
+					android:background="@drawable/bull_icon"
+					/>
+
+				<TextView
+					android:id="@+id/beef_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_marginEnd="13dp"
+					android:layout_toStartOf="@+id/buy_bull"
+					android:background="@drawable/beef_icon"
+					android:gravity="bottom|center"
+					android:textColor="@android:color/white"
+					android:text="123"
+					/>
+
+				<TextView
+					android:id="@+id/bull_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignBottom="@id/bull_icon"
+					android:background="@drawable/category_count"
+					android:gravity="center"
+					android:text="102"
+					android:textColor="@android:color/white"
+					/>
+
+				<Button
+					android:id="@+id/buy_bull"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@+id/bull_income"
+					android:layout_toEndOf="@+id/bull_icon"
+					android:background="@drawable/buy_button"
+					/>
+
+
+				<TextView
+					android:id="@+id/bull_income"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_marginEnd="14dp"
+					android:layout_toEndOf="@+id/bull_icon"
+					android:background="@drawable/income_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
+					/>
+
+				<TextView
+					android:id="@+id/clock_bull"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_toEndOf="@+id/buy_bull"
+					android:background="@drawable/clock_icon"
+					/>
+
+				<TextView
+					android:id="@+id/sell_beef"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/sell_material_icon"
+					android:layout_below="@+id/clock_bull"
+					android:layout_toEndOf="@+id/buy_bull"
+					/>
+			</RelativeLayout>
+
 		</LinearLayout>
 
-		<LinearLayout
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
+	</ScrollView>
 
-			<Button
-				android:id="@+id/sell_milk_button"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Sell Milk"
-				/>
 
-			<Button
-				android:id="@+id/sell_beef_button"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Sell Beef"
-				/>
-
-			<Button
-				android:id="@+id/reset_game"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Reset Game"
-				/>
-		</LinearLayout>
-
-	</LinearLayout>
 </LinearLayout>
