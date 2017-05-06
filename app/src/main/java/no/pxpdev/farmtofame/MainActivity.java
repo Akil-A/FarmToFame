@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -45,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
     private static final String ID_BEEF = "sellBeef";
     private static final String RESET_GAME = "resetGame";
 
+    private static final String FARMER_VIEW = "mFarmerView";
+    private static final String FACTORY_VIEW = "mFactoryView";
+    private static final String LAND_VIEW = "mLandView";
+    private static final String CHICKEN_VIEW = "mChickenView";
+    private static final String PIG_VIEW = "mPigView";
+    private static final String SHEEP_VIEW = "mSheepView";
+    private static final String COW_VIEW = "mCowView";
+    private static final String BULL_VIEW = "mBullView";
+
 
     private HashMap<String, UiTimedEvent> mTimedEvents = new HashMap<>();
     private HashMap<String, UiTimedEvent> mCategories = new HashMap<>();
@@ -59,13 +69,21 @@ public class MainActivity extends AppCompatActivity {
     private TextView mBullTextView;
     private TextView mTotalMoney;
     private TextView mAnimalsTextView;
-    private TextView mLandsTextView;
-    private TextView mEggsTextView;
-    private TextView mFactoriesTextView;
-    private TextView mWoolTextView;
-    private TextView mBaconTextView;
-    private TextView mMilkTextView;
-    private TextView mBeefTextView;
+
+    private TextView mFarmersCounter;
+    private TextView mFactoriesCounter;
+    private TextView mLandsCounter;
+    private TextView mChickensCounter;
+    private TextView mPigsCounter;
+    private TextView mSheepsCounter;
+    private TextView mCowsCounter;
+    private TextView mBullsCounter;
+
+    private TextView mEggsCounter;
+    private TextView mWoolsCounter;
+    private TextView mBaconsCounter;
+    private TextView mMilksCounter;
+    private TextView mBeefsCounter;
 
     private Button mBuyFarmer;
     private Button mBuyFactory;
@@ -75,12 +93,22 @@ public class MainActivity extends AppCompatActivity {
     private Button mBuySheep;
     private Button mBuyCow;
     private Button mBuyBull;
+
     private TextView mSellEggs;
     private TextView mSellBacon;
     private TextView mSellWool;
     private TextView mSellMilk;
     private TextView mSellBeef;
     private Button mResetGame;
+
+    private ImageView mFarmerView;
+    private ImageView mFactoryView;
+    private ImageView mLandView;
+    private ImageView mChickenView;
+    private ImageView mPigView;
+    private ImageView mSheepView;
+    private ImageView mCowView;
+    private ImageView mBullView;
 
     private float mSum = 10;
     private float mTempSum = 10;
@@ -138,13 +166,22 @@ public class MainActivity extends AppCompatActivity {
         mSheepTextView = (TextView) findViewById(R.id.sheep_income);
         mCowTextView = (TextView) findViewById(R.id.cow_income);
         mBullTextView = (TextView) findViewById(R.id.bull_income);
-        mLandsTextView = (TextView) findViewById(R.id.land_counter);
-        mEggsTextView = (TextView) findViewById(R.id.egg_icon);
-        mWoolTextView = (TextView) findViewById(R.id.wool_icon);
-        mBaconTextView = (TextView) findViewById(R.id.bacon_icon);
-        mMilkTextView = (TextView) findViewById(R.id.milk_icon);
-        mBeefTextView = (TextView) findViewById(R.id.beef_icon);
-        mFactoriesTextView = (TextView) findViewById(R.id.factory_counter);
+
+        mEggsCounter = (TextView) findViewById(R.id.egg_icon);
+        mWoolsCounter = (TextView) findViewById(R.id.wool_icon);
+        mBaconsCounter = (TextView) findViewById(R.id.bacon_icon);
+        mMilksCounter = (TextView) findViewById(R.id.milk_icon);
+        mBeefsCounter = (TextView) findViewById(R.id.beef_icon);
+
+        mFarmersCounter = (TextView)findViewById(R.id.farmer_counter);
+        mFactoriesCounter = (TextView) findViewById(R.id.factory_counter);
+        mLandsCounter = (TextView) findViewById(R.id.land_counter);
+        mChickensCounter = (TextView)findViewById(R.id.chicken_counter);
+        mPigsCounter = (TextView)findViewById(R.id.pig_counter);
+        mSheepsCounter = (TextView)findViewById(R.id.sheep_counter);
+        mCowsCounter = (TextView)findViewById(R.id.cow_counter);
+        mBullsCounter = (TextView)findViewById(R.id.bull_counter);
+
 
         mTotalMoney = (TextView) findViewById(R.id.total_money);
 
@@ -203,6 +240,37 @@ public class MainActivity extends AppCompatActivity {
         mSellBeef.setTag(ID_BEEF);
         mSellBeef.setOnClickListener(mSellListener);
 
+        mFarmerView = (ImageView)findViewById(R.id.farmer_icon);
+        mFarmerView.setTag(FARMER_VIEW);
+        mFarmerView.setOnClickListener(mCategoryListener);
+
+        mFactoryView = (ImageView)findViewById(R.id.factory_icon);
+        mFactoryView.setTag(FACTORY_VIEW);
+        mFactoryView.setOnClickListener(mCategoryListener);
+
+        mLandView = (ImageView)findViewById(R.id.land_icon);
+        mLandView.setTag(LAND_VIEW);
+        mLandView.setOnClickListener(mCategoryListener);
+
+        mChickenView = (ImageView)findViewById(R.id.chicken_icon);
+        mChickenView.setTag(CHICKEN_VIEW);
+        mChickenView.setOnClickListener(mCategoryListener);
+
+        mPigView = (ImageView)findViewById(R.id.pig_icon);
+        mPigView.setTag(PIG_VIEW);
+        mPigView.setOnClickListener(mCategoryListener);
+
+        mSheepView = (ImageView)findViewById(R.id.sheep_icon);
+        mSheepView.setTag(SHEEP_VIEW);
+        mSheepView.setOnClickListener(mCategoryListener);
+
+        mCowView = (ImageView)findViewById(R.id.cow_icon);
+        mCowView.setTag(COW_VIEW);
+        mCowView.setOnClickListener(mCategoryListener);
+
+        mBullView = (ImageView)findViewById(R.id.bull_icon);
+        mBullView.setTag(BULL_VIEW);
+        mBullView.setOnClickListener(mCategoryListener);
 
         //Declare Category models
         mFarmer = new Categories(20, 1, 3000, 3);
@@ -226,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private View.OnClickListener mBuyListener = v -> {
+    private View.OnClickListener mCategoryListener = v -> {
         String key = (String) v.getTag();
         /*if(!startTimer(key, 0)){
             stopTimer(key);
@@ -245,7 +313,16 @@ public class MainActivity extends AppCompatActivity {
         sellMaterials(key);
     };
 
-    public void sellMaterials(String id) {
+    private View.OnClickListener mBuyListener = v -> {
+        String key = (String) v.getTag();
+        /*if(!startTimer(key, 0)){
+            stopTimer(key);
+        }*/
+
+        buyListener(key);
+    };
+
+    private void sellMaterials(String id) {
 
         double materials;
 
@@ -253,8 +330,9 @@ public class MainActivity extends AppCompatActivity {
 
             case ID_EGGS:
                 materials = mChicken.getMaterialCounter();
+                Log.d("eggs", String.valueOf(materials));
                 mChicken.setMaterialCounter(0);
-                mEggsTextView.setText(String.valueOf(0));
+                mEggsCounter.setText(String.valueOf(0));
                 materials *= 1.5;
                 mSum += materials*mResetBonus;
                 mTotalMoney.setText(String.format("%.2f", mSum));
@@ -263,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
             case ID_MEAT:
                 materials = mPig.getMaterialCounter();
                 mPig.setMaterialCounter(0);
-                mBaconTextView.setText(String.valueOf(0));
+                mBaconsCounter.setText(String.valueOf(0));
                 materials *= 2.1;
                 mSum += materials*mResetBonus;
                 mTotalMoney.setText(String.format("%.2f", mSum));
@@ -272,7 +350,7 @@ public class MainActivity extends AppCompatActivity {
             case ID_WOOL:
                 materials = mSheep.getMaterialCounter();
                 mSheep.setMaterialCounter(0);
-                mWoolTextView.setText(String.valueOf(0));
+                mWoolsCounter.setText(String.valueOf(0));
                 materials *= 2.5;
                 mSum += materials*mResetBonus;
                 mTotalMoney.setText(String.format("%.2f", mSum));
@@ -281,7 +359,7 @@ public class MainActivity extends AppCompatActivity {
             case ID_MILK:
                 materials = mCow.getMaterialCounter();
                 mCow.setMaterialCounter(0);
-                mMilkTextView.setText(String.valueOf(0));
+                mMilksCounter.setText(String.valueOf(0));
                 materials *= 2.9;
                 mSum += materials*mResetBonus;
                 mTotalMoney.setText(String.format("%.2f", mSum));
@@ -290,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
             case ID_BEEF:
                 materials = mBull.getMaterialCounter();
                 mBull.setMaterialCounter(0);
-                mBeefTextView.setText(String.valueOf(0));
+                mBeefsCounter.setText(String.valueOf(0));
                 materials *= 3.5;
                 mSum += materials*mResetBonus;
                 mTotalMoney.setText(String.format("%.2f", mSum));
@@ -300,6 +378,231 @@ public class MainActivity extends AppCompatActivity {
                 resetGame();
                 break;
         }
+    }
+
+    private void buyListener(String id) {
+
+        boolean buyFarmer = (mAnimals / mFarmers) > 24;
+        boolean buyLand = (mAnimals / mLands) > 99;
+        boolean canBuyFactory = (mLands / mFactories) > 9;
+
+        int categoryCounter;
+        int categoryPrice;
+        double categoryBonus;
+
+        switch (id) {
+
+            case ID_FARMERS:
+                categoryCounter = mFarmer.getCounter();
+                categoryBonus = mFarmer.getCategoryBonus();
+                categoryPrice = mChicken.getPrice();
+
+                if (mSum >= categoryPrice) {
+                    if(!isTimerStarted(id))
+                        reStartTimer(id);
+                    mSum -= categoryPrice;
+                    categoryPrice += ++categoryCounter * 2;
+                    mFarmers++;
+                   /* if(buyFarmer)
+                        mAnimals = 0;*/
+                } else
+                    return;
+
+                mTotalMoney.setText(String.format("%.2f", mSum));
+                mFarmer.setCounter(++categoryCounter);
+                mFarmer.setPrice(categoryPrice);
+                mFarmersCounter.setText(String.valueOf(categoryCounter));
+                mBuyFarmer.setText(String.valueOf(categoryPrice));
+                mFarmerTextView.setText(String.valueOf(categoryBonus));
+                break;
+
+            case ID_FACTORIES:
+
+                categoryCounter = mFactory.getCounter();
+                categoryBonus = mFactory.getCategoryBonus();
+                categoryPrice = mFactory.getPrice();
+
+                if (mSum >= categoryPrice && !buyFarmer && !buyLand) {
+                    mSum -= categoryPrice;
+                    Log.d("buySum", "categoryPrice: " + categoryPrice + "  mSum: " + mSum);
+                    categoryPrice += categoryCounter*2;
+                } else {
+                    if (!canBuyFactory && !mDidReset)
+                        showSnackBar("Need to buy more land first");
+                    return;
+                }
+
+                mTotalMoney.setText(String.format("%.2f", mSum));
+                mFactory.setCounter(++categoryCounter);
+                mFactory.setPrice(categoryPrice);
+                mFactoriesCounter.setText(String.valueOf(categoryCounter));
+                mBuyFactory.setText(String.valueOf(categoryPrice));
+                mFactoryTextView.setText(String.valueOf(categoryBonus));
+                break;
+
+            case ID_LANDS:
+
+                categoryCounter = mLand.getCounter();
+                categoryBonus = mLand.getCategoryBonus();
+                categoryPrice = mLand.getPrice();
+
+                if (mSum >= categoryPrice && !buyFarmer && !buyLand) {
+                    mSum -= categoryPrice;
+                    Log.d("buySum", "categoryPrice: " + categoryPrice + "  mSum: " + mSum);
+                    categoryPrice += categoryCounter*2;
+                } else
+                    return;
+
+                mTotalMoney.setText(String.format("%.2f", mSum));
+                mLand.setCounter(++categoryCounter);
+                mLand.setPrice(categoryPrice);
+                mLandsCounter.setText(String.valueOf(categoryCounter));
+                mBuyLand.setText(String.valueOf(categoryPrice));
+                mLandTextView.setText(String.valueOf(categoryBonus));
+                break;
+
+            case ID_CHICKENS:
+
+                categoryCounter = mChicken.getCounter();
+                categoryBonus = mChicken.getCategoryBonus();
+                categoryPrice = mChicken.getPrice();
+
+                if (mSum >= categoryPrice && !buyFarmer && !buyLand) {
+                    mSum -= categoryPrice;
+                    Log.d("ID_CHICKEN", "categoryPrice: " + categoryPrice + "  mSum: " + mSum);
+                    categoryPrice += categoryCounter*2;
+                    mAnimals++;
+                } else {
+                    if (buyFarmer)
+                        showSnackBar("Need to buy farmer");
+                    else if (buyLand)
+                        showSnackBar("Need to buy land");
+                    Log.d("false", "categoryPrice: " + categoryPrice + " mSum: " + mSum);
+                    return;
+                }
+
+                mTotalMoney.setText(String.format("%.2f", mSum));
+                mChicken.setCounter(++categoryCounter);
+                mChickensCounter.setText(String.valueOf(categoryCounter));
+                mBuyChicken.setText(String.valueOf(categoryPrice));
+                mChicken.setPrice(categoryPrice);
+                mChickenTextView.setText(String.valueOf(categoryBonus));
+                break;
+
+            case ID_PIGS:
+
+                categoryCounter = mPig.getCounter();
+                categoryBonus = mPig.getCategoryBonus();
+                categoryPrice = mPig.getPrice();
+
+                if (mSum >= categoryPrice && !buyFarmer && !buyLand) {
+                    mSum -= categoryPrice;
+                    Log.d("buySum", "categoryPrice: " + categoryPrice + "  mSum: " + mSum);
+                    categoryPrice += categoryCounter*2;
+                    mAnimals++;
+                } else {
+                    if (buyFarmer)
+                        showSnackBar("Need to buy farmer");
+                    else if (buyLand)
+                        showSnackBar("Need to buy land");
+                    Log.d("false", "false");
+                    return;
+                }
+
+                mTotalMoney.setText(String.format("%.2f", mSum));
+                mPig.setCounter(++categoryCounter);
+                mPig.setPrice(categoryPrice);
+                mPigsCounter.setText(String.valueOf(categoryCounter));
+                mBuyPig.setText(String.valueOf(categoryPrice));
+                mPigTextView.setText(String.valueOf(categoryBonus));
+                break;
+
+            case ID_SHEEPS:
+
+                categoryCounter = mSheep.getCounter();
+                categoryBonus = mSheep.getCategoryBonus();
+                categoryPrice = mSheep.getPrice();
+
+                if (mSum >= categoryPrice && !buyFarmer && !buyLand) {
+                    mSum -= categoryPrice;
+                    Log.d("buySum", "categoryPrice: " + categoryPrice + "  mSum: " + mSum);
+                    categoryPrice += categoryCounter*2;
+                    mAnimals++;
+                } else {
+                    if (buyFarmer)
+                        showSnackBar("Need to buy farmer");
+                    else if (buyLand)
+                        showSnackBar("Need to buy land");
+                    Log.d("false", "false");
+                    return;
+                }
+
+                mTotalMoney.setText(String.format("%.2f", mSum));
+                mSheep.setCounter(++categoryCounter);
+                mSheep.setPrice(categoryPrice);
+                mSheepsCounter.setText(String.valueOf(categoryCounter));
+                mBuySheep.setText(String.valueOf(categoryPrice));
+                mSheepTextView.setText(String.valueOf(categoryBonus));
+                break;
+
+            case ID_COWS:
+
+                categoryCounter = mCow.getCounter();
+                categoryBonus = mCow.getCategoryBonus();
+                categoryPrice = mCow.getPrice();
+
+                if (mSum >= categoryPrice && !buyFarmer && !buyLand) {
+                    mSum -= categoryPrice;
+                    Log.d("buySum", "categoryPrice: " + categoryPrice + "  mSum: " + mSum);
+                    categoryPrice += categoryCounter*2;
+                    mAnimals++;
+                } else {
+                    if (buyFarmer)
+                        showSnackBar("Need to buy farmer");
+                    else if (buyLand)
+                        showSnackBar("Need to buy land");
+                    Log.d("false", "false");
+                    return;
+                }
+
+                mTotalMoney.setText(String.format("%.2f", mSum));
+                mCow.setCounter(++categoryCounter);
+                mCow.setPrice(categoryPrice);
+                mCowsCounter.setText(String.valueOf(categoryCounter));
+                mBuyCow.setText(String.valueOf(categoryPrice));
+                mCowTextView.setText(String.valueOf(categoryBonus));
+                break;
+
+            case ID_BULLS:
+
+                categoryCounter = mBull.getCounter();
+                categoryBonus = mBull.getCategoryBonus();
+                categoryPrice = mBull.getPrice();
+
+                if (mSum >= categoryPrice && !buyFarmer && !buyLand) {
+                    mSum -= categoryPrice;
+                    Log.d("buySum", "categoryPrice: " + categoryPrice + "  mSum: " + mSum);
+                    categoryPrice += categoryCounter*2;
+                    mAnimals++;
+                } else {
+                    if (buyFarmer)
+                        showSnackBar("Need to buy farmer");
+                    else if (buyLand)
+                        showSnackBar("Need to buy land");
+                    Log.d("false", "false");
+                    return;
+                }
+
+                mTotalMoney.setText(String.format("%.2f", mSum));
+                mBull.setCounter(++categoryCounter);
+                mBull.setPrice(categoryPrice);
+                mBullsCounter.setText(String.valueOf(categoryCounter));
+                mBuyBull.setText(String.valueOf(categoryPrice));
+                mBullTextView.setText(String.valueOf(categoryBonus));
+                break;
+        }
+
+
     }
 
     private boolean startTimer(String id, int initial) {
@@ -316,14 +619,12 @@ public class MainActivity extends AppCompatActivity {
         int categoryCounter;
         int categoryPrice;
         double categoryBonus;
-        boolean buyFarmer = (mAnimals / mFarmers) > 24;
-        boolean buyLand = (mAnimals / mLands) > 99;
-        boolean canBuyFactory = (mLands / mFactories) > 9;
+
 
         switch (id) {
-            case ID_FARMERS:
+            case FARMER_VIEW:
+                Log.d(TAG, "mFarmerView");
                 categoryTimeout = mFarmer.getTimeout();
-                categoryCounter = mFarmer.getCounter();
                 categoryBonus = mFarmer.getCategoryBonus();
                 categoryPrice = mFarmer.getPrice();
 
@@ -331,14 +632,10 @@ public class MainActivity extends AppCompatActivity {
                     if(!isTimerStarted(id))
                         reStartTimer(id);
                     mSum -= categoryPrice;
-                    categoryPrice += ++categoryCounter * 2;
-                    mFarmers++;
                    /* if(buyFarmer)
                         mAnimals = 0;*/
                 } else
                     return false;
-
-                mFarmerTextView.setText(String.valueOf(categoryPrice));
 
                 callback = (counter) -> {
                     mSum += categoryBonus;
@@ -346,37 +643,29 @@ public class MainActivity extends AppCompatActivity {
                         mTempSum = mSum;
                     }
                 };
-                mFarmer.setCounter(++categoryCounter);
-                mFarmer.setPrice(categoryPrice);
                 break;
 
-            case ID_FACTORIES:
+            case FACTORY_VIEW:
 
                 categoryTimeout = mFactory.getTimeout();
-                categoryCounter = mFactory.getCounter();
                 categoryBonus = mFactory.getCategoryBonus();
                 categoryPrice = mFactory.getPrice();
 
-                if (mSum >= categoryPrice && canBuyFactory) {
+                if (mSum >= categoryPrice) {
                     if(!isTimerStarted(id))
                         reStartTimer(id);
                     mSum -= categoryPrice;
-                    categoryPrice += ++categoryCounter*2;
-                    mFactories++;
-                    mFactoryOn = true;
-                } else {
-                    if (!canBuyFactory && !mDidReset)
-                        showSnackBar("Need to buy more land first");
-                }
+                    //mFactoryOn = true;
+                } else
+                    return false;
 
-                mFactoryTextView.setText(String.valueOf(categoryPrice));
-                mFactoriesTextView.setText(String.valueOf(mFactories));
 
-                mBuyFactory.setEnabled(false);
+                mFactoryView.setEnabled(false);
+                Log.d("beforeHandler", String.valueOf(mFactoryOn));
+
 
                 new Handler().postDelayed(() -> {
-                    mBuyFactory.setEnabled(true);
-                    pauseTimer(id);
+                    mFactoryView.setEnabled(true);
                 }, 1000);
 
                 callback = (counter) -> {
@@ -386,45 +675,44 @@ public class MainActivity extends AppCompatActivity {
                      * TODO Remove shitty booleans
                      */
 
+                    Log.d("beforeFactory", String.valueOf(mFactoryOn));
+
                     if(mFactoryOn) {
 
                         int materials;
                         Log.d("insidefactory", "insidefactory");
 
                         materials = (mChicken.getCounter() * mFactory.getCounter()) + mChicken.getMaterialCounter();
-                        mEggsTextView.setText(String.valueOf(materials));
+                        mEggsCounter.setText(String.valueOf(materials));
                         mChicken.setMaterialCounter(materials + 15);
 
                         if (mSheepFactory) {
                             Log.d("mSheepFactory", "mSheepFactory");
                             materials = (mSheep.getCounter() * mFactory.getCounter()) + mSheep.getMaterialCounter();
-                            mWoolTextView.setText(String.valueOf(materials));
+                            mWoolsCounter.setText(String.valueOf(materials));
                             mSheep.setMaterialCounter(materials + 3);
                         }
 
                         if (mPigFactory) {
                             materials = (mPig.getCounter() * mFactory.getCounter()) + mPig.getMaterialCounter();
-                            mBaconTextView.setText(String.valueOf(materials));
+                            mBaconsCounter.setText(String.valueOf(materials));
                             mPig.setMaterialCounter(materials + 2);
                         }
 
                         if (mCowFactory) {
                             materials = (mCow.getCounter() * mFactory.getCounter()) + mCow.getMaterialCounter();
-                            mMilkTextView.setText(String.valueOf(materials));
+                            mMilksCounter.setText(String.valueOf(materials));
                             mCow.setMaterialCounter(materials + 33);
                         }
 
                         if (mBullFactory) {
                             materials = (mBull.getCounter() * mFactory.getCounter()) + mBull.getMaterialCounter();
-                            mBeefTextView.setText(String.valueOf(materials));
+                            mBeefsCounter.setText(String.valueOf(materials));
                             mBull.setMaterialCounter(materials + 1);
                         }
                     }
                 };
                 /**Set this before callback?... **/
-                mFactory.setCounter(++categoryCounter);
-                mFactory.setPrice(categoryPrice);
-
                 break;
 
             /*
@@ -432,9 +720,8 @@ public class MainActivity extends AppCompatActivity {
              * mResetBonus won't work for categoryBonus = 1 because of rounding
              */
 
-            case ID_LANDS:
+            case LAND_VIEW:
                 categoryTimeout = mLand.getTimeout();
-                categoryCounter = mLand.getCounter();
                 categoryBonus = mLand.getCategoryBonus();
                 categoryPrice = mLand.getPrice();
 
@@ -442,12 +729,8 @@ public class MainActivity extends AppCompatActivity {
                     if(!isTimerStarted(id))
                         reStartTimer(id);
                     mSum -= categoryPrice;
-                    //categoryPrice += categoryCounter*2;
-                    mLands++;
                 } else
                     return false;
-
-                mLandTextView.setText(String.valueOf(categoryPrice));
 
                 callback = (counter) -> {
                     mSum += categoryBonus*mResetBonus;
@@ -456,79 +739,45 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 };
-                mLand.setCounter(++categoryCounter);
-                mLand.setPrice(categoryPrice);
                 break;
 
-            case ID_CHICKENS:
+            case CHICKEN_VIEW:
                 categoryTimeout = mChicken.getTimeout();
-                categoryCounter = mChicken.getCounter();
                 categoryBonus = mChicken.getCategoryBonus();
-                categoryPrice = mChicken.getPrice();
 
-                if (mSum >= categoryPrice && !buyFarmer && !buyLand) {
-                    if(!isTimerStarted(id))
-                        reStartTimer(id);
-                    mSum -= categoryPrice;
-                    categoryPrice += categoryCounter*2;
-                    mAnimals++;
-                } else {
-                    if (buyFarmer)
-                        showSnackBar("Need to buy farmer");
-                    else if (buyLand)
-                        showSnackBar("Need to buy land");
-                    Log.d("false", "false");
-                    return false;
-                }
+                if(!isTimerStarted(id))
+                    reStartTimer(id);
 
-                mChickenTextView.setText(String.valueOf(categoryPrice));
-
-                mBuyChicken.setEnabled(false);
+                mChickenView.setEnabled(false);
 
                 new Handler().postDelayed(() -> {
-                    mBuyChicken.setEnabled(true);
+                    mChickenView.setEnabled(true);
                 }, 1000);
 
                 callback = (counter) -> {
                     mSum += categoryBonus*mResetBonus;
+                    Log.d("bonusSum", "categoryBonus: " + categoryBonus + "  mSum: " + mSum);
                     if(mTempSum < mSum) {
                         smoothCounter(mTempSum, mSum, 1000);
                         mTempSum = mSum;
                         pauseTimer(id);
                     }
                 };
-                mChicken.setCounter(++categoryCounter);
-                mChicken.setPrice(categoryPrice);
-
+                mTotalMoney.setText(String.format("%.2f", mSum));
                 break;
 
-            case ID_PIGS:
+            case PIG_VIEW:
                 categoryTimeout = mPig.getTimeout();
-                categoryCounter = mPig.getCounter();
                 categoryBonus = mPig.getCategoryBonus();
-                categoryPrice = mPig.getPrice();
 
-                if (mSum >= categoryPrice && !buyFarmer && !buyLand) {
-                    if(!isTimerStarted(id))
-                        reStartTimer(id);
-                    mSum -= categoryPrice;
-                    categoryPrice += categoryCounter * 2;
-                    mAnimals++;
-                    mPigFactory = true;
-                } else {
-                    if (buyFarmer)
-                        showSnackBar("Need to buy farmer");
-                    else if (buyLand)
-                        showSnackBar("Need to buy land");
-                    return false;
-                }
+                if(!isTimerStarted(id))
+                    reStartTimer(id);
+                    //mPigFactory = true;
 
-                mPigTextView.setText(String.valueOf(categoryPrice));
-
-                mBuyPig.setEnabled(false);
+                mPigView.setEnabled(false);
 
                 new Handler().postDelayed(() -> {
-                    mBuyPig.setEnabled(true);
+                    mPigView.setEnabled(true);
                 }, 1000);
 
                 callback = (counter) -> {
@@ -540,40 +789,21 @@ public class MainActivity extends AppCompatActivity {
                         pauseTimer(id);
                     }
                 };
-                mPig.setCounter(++categoryCounter);
-                mPig.setPrice(categoryPrice);
+                mTotalMoney.setText(String.format("%.2f", mSum));
                 break;
 
-            case ID_SHEEPS:
-
+            case SHEEP_VIEW:
                 categoryTimeout = mSheep.getTimeout();
-                categoryCounter = mSheep.getCounter();
                 categoryBonus = mSheep.getCategoryBonus();
-                categoryPrice = mSheep.getPrice();
 
-                if (mSum >= categoryPrice && !buyFarmer && !buyLand) {
-                    if(!isTimerStarted(id))
-                        reStartTimer(id);
-                    mSum -= categoryPrice;
-                    categoryPrice += categoryCounter * 2;
-                    mAnimals++;
-                    mSheepFactory = true;
-                } else {
-                    if (buyFarmer)
-                        showSnackBar("Need to buy farmer");
-                    else if (buyLand)
-                        showSnackBar("Need to buy land");
+                if(!isTimerStarted(id))
+                    reStartTimer(id);
+                    //mSheepFactory = true;
 
-                    return false;
-                }
-
-                mSheepTextView.setText(String.valueOf(categoryPrice));
-
-                mBuySheep.setEnabled(false);
+                mSheepView.setEnabled(false);
 
                 new Handler().postDelayed(() -> {
-                    mBuySheep.setEnabled(true);
-                    pauseTimer(id);
+                    mSheepView.setEnabled(true);
                 }, 2000);
 
                 callback = (counter) -> {
@@ -584,40 +814,20 @@ public class MainActivity extends AppCompatActivity {
                         pauseTimer(id);
                     }
                 };
-                mSheep.setCounter(++categoryCounter);
-                mSheep.setPrice(categoryPrice);
                 break;
 
-            case ID_COWS:
-
+            case COW_VIEW:
                 categoryTimeout = mCow.getTimeout();
-                categoryCounter = mCow.getCounter();
                 categoryBonus = mCow.getCategoryBonus();
-                categoryPrice = mCow.getPrice();
 
-                if (mSum >= categoryPrice && !buyFarmer && !buyLand) {
-                    if(!isTimerStarted(id))
-                        reStartTimer(id);
-                    mSum -= categoryPrice;
-                    categoryPrice += categoryCounter * 2;
-                    mAnimals++;
-                    mCowFactory = true;
-                } else {
-                    if (buyFarmer)
-                        showSnackBar("Need to buy farmer");
-                    else if (buyLand)
-                        showSnackBar("Need to buy land");
+                if(!isTimerStarted(id))
+                    reStartTimer(id);
+                    //mCowFactory = true;
 
-                    return false;
-                }
-
-                mCowTextView.setText(String.valueOf(categoryPrice));
-
-                mBuyCow.setEnabled(false);
+                mCowView.setEnabled(false);
 
                 new Handler().postDelayed(() -> {
-                    mBuyCow.setEnabled(true);
-                    pauseTimer(id);
+                    mCowView.setEnabled(true);
                 }, 2000);
 
                 callback = (counter) -> {
@@ -628,40 +838,22 @@ public class MainActivity extends AppCompatActivity {
                         pauseTimer(id);
                     }
                 };
-                mCow.setCounter(++categoryCounter);
-                mCow.setPrice(categoryPrice);
                 break;
 
-            case ID_BULLS:
-
+            case BULL_VIEW:
                 categoryTimeout = mBull.getTimeout();
-                categoryCounter = mBull.getCounter();
                 categoryBonus = mBull.getCategoryBonus();
                 categoryPrice = mBull.getPrice();
 
-                if (mSum >= categoryPrice && !buyFarmer && !buyLand) {
-                    if(!isTimerStarted(id))
-                        reStartTimer(id);
-                    mSum -= categoryPrice;
-                    categoryPrice += categoryCounter * 2;
-                    mAnimals++;
-                    mBullFactory = true;
-                } else {
-                    if (buyFarmer)
-                        showSnackBar("Need to buy farmer");
-                    else if (buyLand)
-                        showSnackBar("Need to buy land");
+                if(!isTimerStarted(id))
+                    reStartTimer(id);
+                    //mBullFactory = true;
 
-                    return false;
-                }
 
-                mBullTextView.setText(String.valueOf(categoryPrice));
-
-                mBuyBull.setEnabled(false);
+                 mBullView.setEnabled(false);
 
                 new Handler().postDelayed(() -> {
-                    mBuyBull.setEnabled(true);
-                    pauseTimer(id);
+                    mBullView.setEnabled(true);
                 }, 2000);
 
                 callback = (counter) -> {
@@ -672,8 +864,6 @@ public class MainActivity extends AppCompatActivity {
                         pauseTimer(id);
                     }
                 };
-                mBull.setCounter(++categoryCounter);
-                mBull.setPrice(categoryPrice);
                 break;
 
             default:
@@ -682,7 +872,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //mAnimalsTextView.setText(String.valueOf(mAnimals));
-        mLandsTextView.setText(String.valueOf(mLands));
+        mLandsCounter.setText(String.valueOf(mLands));
 
         if (mTimedEvents.containsKey(id)) {
             return false;
@@ -884,25 +1074,25 @@ public class MainActivity extends AppCompatActivity {
 
         mFarmerTextView.setText(String.valueOf(mFarmer.getPrice()));
         mFactoryTextView.setText(String.valueOf(mFactory.getPrice()));
-        mLandsTextView.setText(String.valueOf(mFactory.getPrice()));
+        mLandsCounter.setText(String.valueOf(mFactory.getPrice()));
         mChickenTextView.setText(String.valueOf(mChicken.getPrice()));
         mPigTextView.setText(String.valueOf(mPig.getPrice()));
         mSheepTextView.setText(String.valueOf(mSheep.getPrice()));
         mCowTextView.setText(String.valueOf(mCow.getPrice()));
         mBullTextView.setText(String.valueOf(mBull.getPrice()));
 
-        mFactoriesTextView.setText(String.valueOf(mFactory.getCounter()));
-        mLandsTextView.setText(String.valueOf(mLand.getCounter()));
+        mFactoriesCounter.setText(String.valueOf(mFactory.getCounter()));
+        mLandsCounter.setText(String.valueOf(mLand.getCounter()));
 
         mAnimals = mCategoriesPreferences.getInt("animals", 0);
         mAnimalsTextView.setText(String.valueOf(mAnimals));
 
-        mEggsTextView.setText(String.valueOf(mChicken.getMaterialCounter()));
+        mEggsCounter.setText(String.valueOf(mChicken.getMaterialCounter()));
         //TODO change meat to bacon
-        mBaconTextView.setText(String.valueOf(mPig.getMaterialCounter()));
-        mWoolTextView.setText(String.valueOf(mSheep.getMaterialCounter()));
-        mMilkTextView.setText(String.valueOf(mCow.getMaterialCounter()));
-        mBeefTextView.setText(String.valueOf(mBull.getMaterialCounter()));
+        mBaconsCounter.setText(String.valueOf(mPig.getMaterialCounter()));
+        mWoolsCounter.setText(String.valueOf(mSheep.getMaterialCounter()));
+        mMilksCounter.setText(String.valueOf(mCow.getMaterialCounter()));
+        mBeefsCounter.setText(String.valueOf(mBull.getMaterialCounter()));
 
 
         mFarmers = mCategoriesPreferences.getInt("farmers", 1);
@@ -937,13 +1127,13 @@ public class MainActivity extends AppCompatActivity {
         mCowTextView.setText("");
         mBullTextView.setText("");
         mAnimalsTextView.setText("");
-        mLandsTextView.setText("");
-        mEggsTextView.setText("");
-        mWoolTextView.setText("");
-        mBaconTextView.setText("");
-        mMilkTextView.setText("");
-        mBeefTextView.setText("");
-        mFactoriesTextView.setText("");
+        mLandsCounter.setText("");
+        mEggsCounter.setText("");
+        mWoolsCounter.setText("");
+        mBaconsCounter.setText("");
+        mMilksCounter.setText("");
+        mBeefsCounter.setText("");
+        mFactoriesCounter.setText("");
         mTotalMoney.setText(String.format("%.2f", mSum));
 
 

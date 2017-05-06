@@ -60,9 +60,10 @@
 					android:id="@+id/buy_farmer"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_below="@+id/farmer_income"
-					android:layout_toEndOf="@+id/farmer_icon"
 					android:background="@drawable/buy_button"
+					android:layout_alignParentBottom="true"
+					android:layout_toEndOf="@+id/farmer_icon"
+				    android:text=""
 					/>
 
 
@@ -124,6 +125,7 @@
 					android:layout_below="@+id/factory_income"
 					android:layout_toEndOf="@+id/factory_icon"
 					android:background="@drawable/buy_button"
+					android:text=""
 					/>
 
 
@@ -184,6 +186,7 @@
 					android:layout_below="@+id/land_income"
 					android:layout_toEndOf="@+id/land_icon"
 					android:background="@drawable/buy_button"
+					android:text=""
 					/>
 
 
@@ -257,6 +260,7 @@
 					android:layout_below="@+id/chicken_income"
 					android:layout_toEndOf="@+id/chicken_icon"
 					android:background="@drawable/buy_button"
+					android:text=""
 					/>
 
 
@@ -340,6 +344,7 @@
 					android:layout_below="@+id/pig_income"
 					android:layout_toEndOf="@+id/pig_icon"
 					android:background="@drawable/buy_button"
+					android:text=""
 					/>
 
 
@@ -422,6 +427,7 @@
 					android:layout_below="@+id/sheep_income"
 					android:layout_toEndOf="@+id/sheep_icon"
 					android:background="@drawable/buy_button"
+					android:text=""
 					/>
 
 
@@ -487,7 +493,7 @@
 					/>
 
 				<TextView
-					android:id="@+id/cow_button"
+					android:id="@+id/cow_counter"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_alignBottom="@id/cow_icon"
@@ -504,6 +510,7 @@
 					android:layout_below="@+id/cow_income"
 					android:layout_toEndOf="@+id/cow_icon"
 					android:background="@drawable/buy_button"
+					android:text=""
 					/>
 
 
@@ -569,7 +576,7 @@
 					/>
 
 				<TextView
-					android:id="@+id/bull_button"
+					android:id="@+id/bull_counter"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_alignBottom="@id/bull_icon"
@@ -586,6 +593,7 @@
 					android:layout_below="@+id/bull_income"
 					android:layout_toEndOf="@+id/bull_icon"
 					android:background="@drawable/buy_button"
+					android:text=""
 					/>
 
 

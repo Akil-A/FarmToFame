@@ -6,12 +6,12 @@ package no.pxpdev.farmtofame;
 
 public class Categories {
 
-    int mPrice;
-    int mCounter;
-    int mTimeout;
-    double mCategoryBonus;
-    int mMaterials;
-    int mMaterialCounter = 1;
+    private int mPrice;
+    private int mCounter;
+    private int mTimeout;
+    private  double mCategoryBonus;
+    private int mMaterials;
+    private int mMaterialCounter;
 
     public Categories(int price, int counter, int time, double categoryBonus) {
         mPrice = price;
