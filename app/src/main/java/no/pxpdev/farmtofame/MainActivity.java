@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private HashMap<String, UiTimedEvent> mTimedEvents = new HashMap<>();
-    private HashMap<String, UiTimedEvent> mCategories = new HashMap<>();
 
     private TextView mFarmerTextView;
     private TextView mFactoryTextView;
@@ -109,6 +108,15 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mSheepView;
     private ImageView mCowView;
     private ImageView mBullView;
+
+    private TextView mFarmerClock;
+    private TextView mFactoryClock;
+    private TextView mLandClock;
+    private TextView mChickenClock;
+    private TextView mPigClock;
+    private TextView mSheepClock;
+    private TextView mCowClock;
+    private TextView mBullClock;
 
     private float mSum = 10;
     private float mTempSum = 10;
@@ -181,6 +189,15 @@ public class MainActivity extends AppCompatActivity {
         mSheepsCounter = (TextView)findViewById(R.id.sheep_counter);
         mCowsCounter = (TextView)findViewById(R.id.cow_counter);
         mBullsCounter = (TextView)findViewById(R.id.bull_counter);
+
+        mFarmerClock = (TextView) findViewById(R.id.clock_farmer);
+        mFactoryClock = (TextView) findViewById(R.id.clock_factory);
+        mLandClock = (TextView) findViewById(R.id.clock_land);
+        mChickenClock = (TextView) findViewById(R.id.clock_chicken);
+        mPigClock = (TextView) findViewById(R.id.clock_pig);
+        mSheepClock = (TextView) findViewById(R.id.clock_sheep);
+        mCowClock = (TextView) findViewById(R.id.clock_cow);
+        mBullClock = (TextView) findViewById(R.id.clock_bull);
 
 
         mTotalMoney = (TextView) findViewById(R.id.total_money);
@@ -426,6 +443,7 @@ public class MainActivity extends AppCompatActivity {
                     mSum -= categoryPrice;
                     Log.d("buySum", "categoryPrice: " + categoryPrice + "  mSum: " + mSum);
                     categoryPrice += categoryCounter*2;
+                    mFactoryOn = true;
                 } else {
                     if (!canBuyFactory && !mDidReset)
                         showSnackBar("Need to buy more land first");
@@ -457,6 +475,7 @@ public class MainActivity extends AppCompatActivity {
                 mLand.setCounter(++categoryCounter);
                 mLand.setPrice(categoryPrice);
                 mLandsCounter.setText(String.valueOf(categoryCounter));
+                Log.d("landCounter", "mLandsCounter: " + mLandsCounter);
                 mBuyLand.setText(String.valueOf(categoryPrice));
                 mLandTextView.setText(String.valueOf(categoryBonus));
                 break;
@@ -500,6 +519,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("buySum", "categoryPrice: " + categoryPrice + "  mSum: " + mSum);
                     categoryPrice += categoryCounter*2;
                     mAnimals++;
+                    mPigFactory = true;
                 } else {
                     if (buyFarmer)
                         showSnackBar("Need to buy farmer");
@@ -528,6 +548,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("buySum", "categoryPrice: " + categoryPrice + "  mSum: " + mSum);
                     categoryPrice += categoryCounter*2;
                     mAnimals++;
+                    mSheepFactory = true;
                 } else {
                     if (buyFarmer)
                         showSnackBar("Need to buy farmer");
@@ -556,6 +577,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("buySum", "categoryPrice: " + categoryPrice + "  mSum: " + mSum);
                     categoryPrice += categoryCounter*2;
                     mAnimals++;
+                    mCowFactory = true;
                 } else {
                     if (buyFarmer)
                         showSnackBar("Need to buy farmer");
@@ -584,6 +606,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("buySum", "categoryPrice: " + categoryPrice + "  mSum: " + mSum);
                     categoryPrice += categoryCounter*2;
                     mAnimals++;
+                    mBullFactory = true;
                 } else {
                     if (buyFarmer)
                         showSnackBar("Need to buy farmer");
@@ -601,8 +624,6 @@ public class MainActivity extends AppCompatActivity {
                 mBullTextView.setText(String.valueOf(categoryBonus));
                 break;
         }
-
-
     }
 
     private boolean startTimer(String id, int initial) {
@@ -637,6 +658,11 @@ public class MainActivity extends AppCompatActivity {
                 } else
                     return false;
 
+                    mFarmerView.setImageResource(R.drawable.farmer_pressed_icon);
+                    new Handler().postDelayed(() -> {
+                        mFarmerView.setImageResource(R.drawable.farmer_icon);
+                    }, 1000);
+
                 callback = (counter) -> {
                     mSum += categoryBonus;
                     if(mTempSum<mSum) {
@@ -663,9 +689,9 @@ public class MainActivity extends AppCompatActivity {
                 mFactoryView.setEnabled(false);
                 Log.d("beforeHandler", String.valueOf(mFactoryOn));
 
-
+                mFarmerView.setImageResource(R.drawable.factory_pressed_icon);
                 new Handler().postDelayed(() -> {
-                    mFactoryView.setEnabled(true);
+                    mFarmerView.setImageResource(R.drawable.factory_icon);
                 }, 1000);
 
                 callback = (counter) -> {
@@ -732,6 +758,11 @@ public class MainActivity extends AppCompatActivity {
                 } else
                     return false;
 
+                mLandView.setImageResource(R.drawable.land_pressed_icon);
+                new Handler().postDelayed(() -> {
+                    mLandView.setImageResource(R.drawable.land_icon);
+                }, 1000);
+
                 callback = (counter) -> {
                     mSum += categoryBonus*mResetBonus;
                     if(mTempSum <mSum) {
@@ -749,16 +780,19 @@ public class MainActivity extends AppCompatActivity {
                     reStartTimer(id);
 
                 mChickenView.setEnabled(false);
-
+                mChickenView.setImageResource(R.drawable.chicken_pressed_icon);
                 new Handler().postDelayed(() -> {
                     mChickenView.setEnabled(true);
+                    mChickenView.setImageResource(R.drawable.chicken_icon);
                 }, 1000);
 
+                smoothClockCounter(1, 0, 1000, mChickenClock);
                 callback = (counter) -> {
+                    mTempSum = mSum;
                     mSum += categoryBonus*mResetBonus;
                     Log.d("bonusSum", "categoryBonus: " + categoryBonus + "  mSum: " + mSum);
                     if(mTempSum < mSum) {
-                        smoothCounter(mTempSum, mSum, 1000);
+                        smoothMoneyCounter(mTempSum, mSum, 1000);
                         mTempSum = mSum;
                         pauseTimer(id);
                     }
@@ -775,16 +809,19 @@ public class MainActivity extends AppCompatActivity {
                     //mPigFactory = true;
 
                 mPigView.setEnabled(false);
-
+                mPigView.setImageResource(R.drawable.pig_pressed_icon);
                 new Handler().postDelayed(() -> {
                     mPigView.setEnabled(true);
-                }, 1000);
+                    mPigView.setImageResource(R.drawable.pig_icon);
+                }, 2000);
 
+                smoothClockCounter(2, 0, 2000, mPigClock);
                 callback = (counter) -> {
+                    mTempSum = mSum;
                     mSum += categoryBonus*mResetBonus;
                     Log.d("sum", "mTempsum = " + mTempSum + " mSum = " + mSum);
                     if(mTempSum < mSum) {
-                        smoothCounter(mTempSum, mSum, 1000);
+                        smoothMoneyCounter(mTempSum, mSum, 1000);
                         mTempSum = mSum;
                         pauseTimer(id);
                     }
@@ -801,15 +838,18 @@ public class MainActivity extends AppCompatActivity {
                     //mSheepFactory = true;
 
                 mSheepView.setEnabled(false);
-
+                mSheepView.setImageResource(R.drawable.sheep_pressed_icon);
                 new Handler().postDelayed(() -> {
                     mSheepView.setEnabled(true);
-                }, 2000);
+                    mSheepView.setImageResource(R.drawable.sheep_icon);
+                }, 3000);
 
+                smoothClockCounter(3, 0, 3000, mSheepClock);
                 callback = (counter) -> {
+                    mTempSum = mSum;
                     mSum += categoryBonus*mResetBonus;
                     if(mTempSum <mSum) {
-                        smoothCounter(mTempSum, mSum, 2000);
+                        smoothMoneyCounter(mTempSum, mSum, 2000);
                         mTempSum = mSum;
                         pauseTimer(id);
                     }
@@ -825,15 +865,18 @@ public class MainActivity extends AppCompatActivity {
                     //mCowFactory = true;
 
                 mCowView.setEnabled(false);
-
+                mCowView.setImageResource(R.drawable.cow_pressed_icon);
                 new Handler().postDelayed(() -> {
                     mCowView.setEnabled(true);
-                }, 2000);
+                    mCowView.setImageResource(R.drawable.cow_icon);
+                }, 4000);
 
+                smoothClockCounter(4, 0, 4000, mCowClock);
                 callback = (counter) -> {
+                    mTempSum = mSum;
                     mSum += categoryBonus*mResetBonus;
                     if(mTempSum <mSum) {
-                        smoothCounter(mTempSum, mSum, 2000);
+                        smoothMoneyCounter(mTempSum, mSum, 2000);
                         mTempSum = mSum;
                         pauseTimer(id);
                     }
@@ -850,16 +893,19 @@ public class MainActivity extends AppCompatActivity {
                     //mBullFactory = true;
 
 
-                 mBullView.setEnabled(false);
-
+                mBullView.setEnabled(false);
+                mBullView.setImageResource(R.drawable.bull_pressed_icon);
                 new Handler().postDelayed(() -> {
                     mBullView.setEnabled(true);
-                }, 2000);
+                    mBullView.setImageResource(R.drawable.bull_icon);
+                }, 5000);
 
+                smoothClockCounter(5, 0, 5000, mBullClock);
                 callback = (counter) -> {
+                    mTempSum = mSum;
                     mSum += categoryBonus*mResetBonus;
                     if(mTempSum <mSum) {
-                        smoothCounter(mTempSum, mSum, 2000);
+                        smoothMoneyCounter(mTempSum, mSum, 2000);
                         mTempSum = mSum;
                         pauseTimer(id);
                     }
@@ -872,7 +918,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //mAnimalsTextView.setText(String.valueOf(mAnimals));
-        mLandsCounter.setText(String.valueOf(mLands));
+        //mLandsCounter.setText(String.valueOf(mLands));
 
         if (mTimedEvents.containsKey(id)) {
             return false;
@@ -884,13 +930,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void smoothCounter(float from, float to, int duration) {
+    private void smoothMoneyCounter(float from, float to, int duration) {
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(from, to);
         valueAnimator.setDuration(duration);
 
         valueAnimator.addUpdateListener(valueAnimator1 -> mTotalMoney.setText(String.format("%.2f", valueAnimator1.getAnimatedValue())));
         valueAnimator.start();
     }
+
+    private void smoothClockCounter(float from, float to, int duration, TextView textView) {
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(from, to);
+        valueAnimator.setDuration(duration);
+
+        valueAnimator.addUpdateListener(valueAnimator1 -> textView.setText(String.format("%.2f", valueAnimator1.getAnimatedValue())));
+        valueAnimator.start();
+    }
+
 
     private void showSnackBar(String message) {
         Snackbar.make(mView, message, Snackbar.LENGTH_LONG).show();

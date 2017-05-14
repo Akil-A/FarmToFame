@@ -3,21 +3,56 @@
 	          android:id="@+id/activity_main_layout"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="#0099cc"
+	android:background="@drawable/main_background"
 	android:orientation="vertical"
 	android:gravity="center"
 	tools:context="no.pxpdev.farmtofame.MainActivity"
 	>
 
-	<TextView
-		android:id="@+id/total_money"
-		android:layout_width="wrap_content"
+	<RelativeLayout
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal"
-		android:text="@string/moneyz"
-		android:textSize="15pt"
-		android:layout_marginBottom="12dp"
-		/>
+		>
+		<ImageView
+			android:id="@+id/top_bar"
+			android:background="@drawable/top_bar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			/>
+
+		<ImageView
+			android:id="@+id/profile_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/profile_icon"
+			android:layout_centerVertical="true"
+			android:layout_marginLeft="20dp"/>
+
+		<TextView
+			android:id="@+id/money_symbol"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toEndOf="@id/profile_icon"
+			android:layout_marginLeft="20dp"
+			android:textSize="24sp"
+			android:text="$"
+			android:layout_centerInParent="true"
+		    android:textColor="@android:color/white"
+			/>
+		<TextView
+			android:id="@+id/total_money"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toEndOf="@id/money_symbol"
+			android:layout_centerInParent="true"
+		    android:textColor="@android:color/white"
+		    android:textSize="24sp"
+			tools:text="12345"
+			/>
+	</RelativeLayout>
+
+
 	<ScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
@@ -52,7 +87,6 @@
 					android:layout_alignBottom="@id/farmer_icon"
 					android:background="@drawable/category_count"
 					android:gravity="center"
-					android:text="102"
 					android:textColor="@android:color/white"
 					/>
 
@@ -63,7 +97,6 @@
 					android:background="@drawable/buy_button"
 					android:layout_alignParentBottom="true"
 					android:layout_toEndOf="@+id/farmer_icon"
-				    android:text=""
 					/>
 
 
@@ -86,6 +119,8 @@
 					android:layout_below="@id/farmer_income"
 					android:layout_toEndOf="@+id/buy_farmer"
 					android:background="@drawable/clock_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
 					/>
 
 			</RelativeLayout>
@@ -114,7 +149,6 @@
 					android:layout_alignBottom="@id/factory_icon"
 					android:background="@drawable/category_count"
 					android:gravity="center"
-					android:text="102"
 					android:textColor="@android:color/white"
 					/>
 
@@ -125,7 +159,6 @@
 					android:layout_below="@+id/factory_income"
 					android:layout_toEndOf="@+id/factory_icon"
 					android:background="@drawable/buy_button"
-					android:text=""
 					/>
 
 
@@ -148,6 +181,8 @@
 					android:layout_below="@id/factory_income"
 					android:layout_toEndOf="@+id/buy_factory"
 					android:background="@drawable/clock_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
 					/>
 
 			</RelativeLayout>
@@ -175,7 +210,6 @@
 					android:layout_alignBottom="@id/land_icon"
 					android:background="@drawable/category_count"
 					android:gravity="center"
-					android:text="102"
 					android:textColor="@android:color/white"
 					/>
 
@@ -186,7 +220,6 @@
 					android:layout_below="@+id/land_income"
 					android:layout_toEndOf="@+id/land_icon"
 					android:background="@drawable/buy_button"
-					android:text=""
 					/>
 
 
@@ -207,6 +240,8 @@
 					android:layout_below="@id/land_income"
 					android:layout_toEndOf="@+id/buy_land"
 					android:background="@drawable/clock_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
 					/>
 
 			</RelativeLayout>
@@ -239,7 +274,6 @@
 					android:background="@drawable/egg_icon"
 					android:gravity="bottom|center"
 					android:textColor="@android:color/white"
-				    android:text="123"
 					/>
 
 				<TextView
@@ -249,7 +283,6 @@
 					android:layout_alignBottom="@id/chicken_icon"
 					android:background="@drawable/category_count"
 					android:gravity="center"
-					android:text="102"
 					android:textColor="@android:color/white"
 					/>
 
@@ -260,7 +293,6 @@
 					android:layout_below="@+id/chicken_income"
 					android:layout_toEndOf="@+id/chicken_icon"
 					android:background="@drawable/buy_button"
-					android:text=""
 					/>
 
 
@@ -282,6 +314,8 @@
 					android:layout_height="wrap_content"
 					android:layout_toEndOf="@+id/buy_chicken"
 					android:background="@drawable/clock_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
 					/>
 
 				<TextView
@@ -323,7 +357,6 @@
 					android:background="@drawable/bacon_icon"
 					android:gravity="bottom|center"
 					android:textColor="@android:color/white"
-					android:text="123"
 					/>
 
 				<TextView
@@ -333,7 +366,6 @@
 					android:layout_alignBottom="@id/pig_icon"
 					android:background="@drawable/category_count"
 					android:gravity="center"
-					android:text="102"
 					android:textColor="@android:color/white"
 					/>
 
@@ -366,6 +398,8 @@
 					android:layout_height="wrap_content"
 					android:layout_toEndOf="@+id/buy_pig"
 					android:background="@drawable/clock_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
 					/>
 
 				<TextView
@@ -406,7 +440,6 @@
 					android:background="@drawable/wool_icon"
 					android:gravity="bottom|center"
 					android:textColor="@android:color/white"
-					android:text="123"
 					/>
 
 				<TextView
@@ -416,7 +449,6 @@
 					android:layout_alignBottom="@id/sheep_icon"
 					android:background="@drawable/category_count"
 					android:gravity="center"
-					android:text="102"
 					android:textColor="@android:color/white"
 					/>
 
@@ -449,6 +481,8 @@
 					android:layout_height="wrap_content"
 					android:layout_toEndOf="@+id/buy_sheep"
 					android:background="@drawable/clock_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
 					/>
 
 				<TextView
@@ -489,7 +523,6 @@
 					android:background="@drawable/milk_icon"
 					android:gravity="bottom|center"
 					android:textColor="@android:color/white"
-					android:text="123"
 					/>
 
 				<TextView
@@ -499,7 +532,6 @@
 					android:layout_alignBottom="@id/cow_icon"
 					android:background="@drawable/category_count"
 					android:gravity="center"
-					android:text="102"
 					android:textColor="@android:color/white"
 					/>
 
@@ -532,6 +564,8 @@
 					android:layout_height="wrap_content"
 					android:layout_toEndOf="@+id/buy_cow"
 					android:background="@drawable/clock_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
 					/>
 
 				<TextView
@@ -572,7 +606,6 @@
 					android:background="@drawable/beef_icon"
 					android:gravity="bottom|center"
 					android:textColor="@android:color/white"
-					android:text="123"
 					/>
 
 				<TextView
@@ -582,7 +615,6 @@
 					android:layout_alignBottom="@id/bull_icon"
 					android:background="@drawable/category_count"
 					android:gravity="center"
-					android:text="102"
 					android:textColor="@android:color/white"
 					/>
 
@@ -615,6 +647,8 @@
 					android:layout_height="wrap_content"
 					android:layout_toEndOf="@+id/buy_bull"
 					android:background="@drawable/clock_icon"
+					android:gravity="center"
+					android:textColor="@android:color/white"
 					/>
 
 				<TextView
